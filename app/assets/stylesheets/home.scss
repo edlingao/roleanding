@@ -1,0 +1,101 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$red: #FF0000;
+$deep-blue: #161032;
+$yellow: #FAFF81;
+$light-orange: #FFC53A;
+$orange: #E06D06;
+$light-brown: #B26700;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+
+
+}
+body{
+    background: linear-gradient(to bottom , $yellow, $light-orange);
+    background-attachment: fixed;
+    background-size: contain;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    .main-header{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        padding: 0 25px;
+        
+        .login{
+            width: 60%;
+            
+            background: $deep-blue;
+            color: white;
+            display: flex;
+            align-items: center;
+            border-radius: 20vh;
+
+            form{
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                justify-content: space-around;
+                font-size: 35px;
+                input[type=email], input[type=password]{
+                    font-size: 20px;
+                    outline: none;
+                    border:0;
+                    border-radius: 25vh;
+                    margin-left: 10px;
+                    text-align: left;
+                    padding: 5px 20px;
+
+                }
+
+                input[type=submit]{
+                    font-size: 20px;
+                    border: 0;
+                    cursor: pointer;
+                    padding: 5px 15px;
+
+                    background: $yellow;
+                    color: $deep-blue;
+
+                }
+                .field{
+                    display: flex;
+                    align-items: center;
+
+                }
+            }
+        }
+    }
+
+    .main{
+        margin-top: 10vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 20vh;
+        grid-template-rows: 70vh;
+        padding: 0 40px;
+        .signup{
+            background: $deep-blue;
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .presentation-text{
+            background: white;
+        }
+    }
+}

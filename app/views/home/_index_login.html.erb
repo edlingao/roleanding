@@ -1,0 +1,47 @@
+<div class = "container">
+    <header class = "main-header">
+        <div class = "logo">
+           <%= link_to image_tag("RoleandingLogo.png", class: "logo"), root_path %>  
+        </div>
+        <div class="login">
+            <%= render 'login'%>
+        </div>
+    </header>
+    <main class="main">
+        <aside class = "presentation-text">
+            <h1>Hi and welcome to Reloading</h1>
+            <p>
+                This page is build and design with the main propose to make the roleplaying community lives easier
+                In this page you will be able to:
+            </p>
+            <ul>
+                <li>
+                    Create multiple OC’s sheets as well as edit them and create alternative universe characters
+                </li>
+                <li>
+                    Create chat groups with all your OC’s as well as other people
+                </li>
+                <li>
+                    Create massive communities groups
+                </li>
+                <li>
+                    Create posts as user and watch other user posts
+                </li>
+                <li>
+                    Give likes to well made OC’s sheets and rate them with a beautiful “    “
+                </li>
+            </ul>
+            
+        </aside>
+        <div class="signup">
+            <h1>Are you new?</h1>
+            <h1>Register today!!</h1>
+            <%= link_to  root_path, title: "Sign up with" do%>
+                <p>Signup with <facebook class="facebook">Facebook</facebook> </p>
+            <%end%>
+            <p>Or</p>
+            <%= render 'signup'%>
+        </div>
+    </main>
+    
+</div>

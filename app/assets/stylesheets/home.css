@@ -1,0 +1,123 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Raleway', sans-serif;
+}
+
+body {
+  background: -webkit-gradient(linear, left top, left bottom, from(#FAFF81), to(#FFC53A));
+  background: linear-gradient(to bottom, #FAFF81, #FFC53A);
+  background-attachment: fixed;
+  background-size: contain;
+}
+
+.container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  width: 100%;
+}
+
+.container .main-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-top: 20px;
+  padding: 0 25px;
+}
+
+.container .main-header .login {
+  width: 60%;
+  background: #161032;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 20vh;
+}
+
+.container .main-header .login form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  font-size: 35px;
+}
+
+.container .main-header .login form input[type=email], .container .main-header .login form input[type=password] {
+  font-size: 20px;
+  outline: none;
+  border: 0;
+  border-radius: 25vh;
+  margin-left: 10px;
+  text-align: left;
+  padding: 5px 20px;
+}
+
+.container .main-header .login form input[type=submit] {
+  font-size: 20px;
+  border: 0;
+  cursor: pointer;
+  padding: 5px 15px;
+  background: #FAFF81;
+  color: #161032;
+}
+
+.container .main-header .login form .field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .main {
+  margin-top: 10vh;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  grid-column-gap: 20vh;
+  -ms-grid-rows: 70vh;
+      grid-template-rows: 70vh;
+  padding: 0 40px;
+}
+
+.container .main .signup {
+  background: #161032;
+  color: white;
+  padding: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .main .presentation-text {
+  background: white;
+}
+/*# sourceMappingURL=home.css.map */
