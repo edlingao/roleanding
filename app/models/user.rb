@@ -16,17 +16,8 @@ class User < ApplicationRecord
 
   #Returns true if the user has at least one friends relation
   def has_friends?
-    recived_sended = filter("friends")
-    recived_sended.all?{|recived_sended| recived_sended}
-    has_recived_friends = recived_friends != [] 
-    has_sended_friends = sended_friends != []
-
-    if has_recived_friends || has_sended_friends
-      true
-    else 
-      false
-    end
-
+    recived_sended = filter("friends").flatten!
+    has_recived_sended = recived_sended != []
   end
 
   def pending
