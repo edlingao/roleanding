@@ -16,27 +16,63 @@ class User < ApplicationRecord
 
   #Returns true if the user has at least one friends relation
   def has_friends?
-    recived_sended = filter("friends").flatten!
-    has_recived_sended = recived_sended != []
+    recived_sended = filter("friends")
+    has_recived_sended = recived_sended .flatten! != []
   end
 
+
+  #Returns an array with the friennndships with status = "friends"
+  #ex: 
+  #   [
+  #     [array of recived friendships],
+  #     [array of sended friendships]
+  #   ]   
+
+  def filter_friends
+    friends = filter("friends")
+    
+  end
+
+  #returns an array containing the friendship and the user
+  # ex:
+  #     [
+  #       [user_1, friendship_user1_current_user],
+  #       [user_2, friendship_user2_current_user]
+  #     ]
+  def blocked
+    blockeds = Friendship.where status: "blocked", blocker: self.id
+  end
+  
+  #returns the inverse_friendships with status = "waiting"
+  #Or returns every frienship to confirm
+
   def pending
-    pending = self.inverse_friendships.select{|friendship| 
-      friendship if friendship.status == "waiting"
-    }.map{|person| person}
+    pending = Friendship.where status: 'waiting', friend_id: self.id
     return pending
   end
 
-  #Returns every frienship relation between the current user and the friend users
+  #Returns every frienship relation between the current user and the friend users by the status sended
+  # [  
+  #   [Array of recived friendships]
+  #   [Array of sended friendships]
+  # ]
   
   def filter(status)
-    recived_friends = self.inverse_friendships.select{|friendship| friendship if friendship.status == status}.map{|person| person}
-    sended_friends = self.friendships.select{|friendship| friendship if friendship.status == status}.map{|person| person}
-    frienships = []
-    friendships << recived_friends
-    frienships << sended_friends
-    return frienships
+
+    friendship = []
+    friendship << Friendship.where(status: status, friend_id: self.id)
+    friendship << Friendship.where(status: status, user_id: self.id)
+    friendship 
+    
   end
  
   
 end
+=begin
+    recived_friends = self.inverse_friendships.where status: status
+    sended_friends = self.friendships.where status: status
+    friendships = Array.new
+    friendships << recived_friends
+    friendships << sended_friends
+    return friendships
+=end
