@@ -17,7 +17,8 @@ class User < ApplicationRecord
   #Returns true if the user has at least one friends relation
   def has_friends?
     recived_sended = filter("friends")
-    has_recived_sended = recived_sended .flatten! != []
+    return false if recived_sended.nil?
+    true
   end
 
 
@@ -62,8 +63,8 @@ class User < ApplicationRecord
     friendship = []
     friendship << Friendship.where(status: status, friend_id: self.id)
     friendship << Friendship.where(status: status, user_id: self.id)
-    friendship 
-    
+    return friendship if friendship != [[],[]] 
+    nil
   end
  
   
