@@ -17,31 +17,99 @@ class User < ApplicationRecord
   #Returns true if the user has at least one friends relation
   def has_friends?
     recived_sended = filter("friends")
-    return false if recived_sended.nil?
+    return false if recived_sended == [nil]
     true
   end
 
-
-  #Returns an array with the friennndships with status = "friends"
-  #ex: 
-  #   [
-  #     [array of recived friendships],
-  #     [array of sended friendships]
-  #   ]   
-
+=begin
+  Returns an array with the friennndships with status = "friends" if there are no friends it returns nil
+  ex: 
+    [
+      Array of recived friendships
+      [
+        Array with the user and the freindship
+        [User, Friendship],
+        [User, Friendship]
+      ],
+  
+      Array of sended friendships
+      [ 
+        Array with the user and the freindship
+        [User, Friendship],
+        [User, Friendship]
+      ]
+  
+    ]   
+=end
   def filter_friends
-    friends = filter("friends")
+    if self.has_friends?
+      friendships = filter("friends")
+      recived = []
+      temp = []
+      sended =[]
+      friends = []
+      friendships.each {|array_of_sended_or_recived|
+
+        array_of_sended_or_recived.each{|friendship|
+          if friendship.user_id != self.id
+            temp << User.find(friendship.user_id)
+            temp << friendship
+
+            recived << temp
+          else
+            temp << User.find(friendship.friend_id)
+            temp << friendship
+            sended << temp
+          end
+          temp = []
+        }
+
+      }
+      friends << recived
+      friends << sended
+      return friends
+    else
+      return nil
+    end
     
   end
-
-  #returns an array containing the friendship and the user
-  # ex:
-  #     [
-  #       [user_1, friendship_user1_current_user],
-  #       [user_2, friendship_user2_current_user]
-  #     ]
+=begin
+  Returns an array containing the friendship and the user
+  ex:
+      [
+        Recived Friendships array
+        [user, friendship],
+        [user, friendship]
+      [
+      ],
+        Sended Friendships array
+        [user, friendship],
+        [user, friendship]
+      ]
+=end
   def blocked
-    blockeds = Friendship.where status: "blocked", blocker: self.id
+    temp = []
+    recived_fs = []
+    sended_fs =[]
+    blockeds = []
+    
+    blockeds_fs = Friendship.where status: "blocked", blocker: self.id
+    blockeds_fs.each {|friendship|
+      if friendship.user_id != self.id
+        temp << User.find(friendship.user_id)
+        temp << friendship
+
+        recived_fs << temp
+      else
+        temp << User.find(friendship.friend_id)
+        temp << friendship
+        sended_fs << temp
+      end
+      temp = []
+    }
+    blockeds << recived_fs
+    blockeds << sended_fs
+    return blockeds
   end
   
   #returns the inverse_friendships with status = "waiting"
@@ -51,29 +119,20 @@ class User < ApplicationRecord
     pending = Friendship.where status: 'waiting', friend_id: self.id
     return pending
   end
-
-  #Returns every frienship relation between the current user and the friend users by the status sended
-  # [  
-  #   [Array of recived friendships]
-  #   [Array of sended friendships]
-  # ]
-  
+=begin
+  Returns every frienship relation between the current user and the friend users by the status sended
+  [  
+    [Array of recived friendships]
+    [Array of sended friendships]
+  ]
+=end
   def filter(status)
 
     friendship = []
     friendship << Friendship.where(status: status, friend_id: self.id)
     friendship << Friendship.where(status: status, user_id: self.id)
     return friendship if friendship != [[],[]] 
-    nil
+    [nil]
   end
  
-  
 end
-=begin
-    recived_friends = self.inverse_friendships.where status: status
-    sended_friends = self.friendships.where status: status
-    friendships = Array.new
-    friendships << recived_friends
-    friendships << sended_friends
-    return friendships
-=end
