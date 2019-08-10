@@ -14,6 +14,19 @@ class User < ApplicationRecord
   has_many :inverse_friends, through: :inverse_friendships, source: :user
 
 
+  
+  def all_users
+    all_users = User.all
+    users = []
+    all_users.each{|user|
+      if user.id != self.id && user.status != "blocked"
+        users << user
+      end
+    }
+    users
+  end
+
+
   #Returns true if the user has at least one friends relation
   def has_friends?
     recived_sended = filter("friends")
@@ -69,12 +82,12 @@ class User < ApplicationRecord
       friends << sended
       return friends
     else
-      return nil
+      return [nil]
     end
     
   end
 =begin
-  Returns an array containing the friendship and the user
+  Returns an array containing the friendship and the user with the blocked information
   ex:
       [
         Recived Friendships array
