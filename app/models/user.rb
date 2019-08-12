@@ -19,14 +19,17 @@ class User < ApplicationRecord
     all_users = User.all
     users = []
     all_users.each{|user|
-      if user.id != self.id && user.status != "blocked"
+      if user.id == self.id && Friendship.exists?(user_id: user.id) || Friendship.exists?(friend_id: user.id)
         users << user
       end
     }
+
     users
   end
 
-
+  def test 
+    friends = User.joins(:friendships).where(friendships.user_id: )
+  end
   #Returns true if the user has at least one friends relation
   def has_friends?
     recived_sended = filter("friends")
