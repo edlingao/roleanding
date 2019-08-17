@@ -19,7 +19,7 @@ class User < ApplicationRecord
     all_users = User.all
     users = []
     all_users.each{|user|
-      if user.id == self.id && Friendship.exists?(user_id: user.id) || Friendship.exists?(friend_id: user.id)
+      if user.id == self.id && !Friendship.exists?(user_id: user.id) || !Friendship.exists?(friend_id: user.id)
         users << user
       end
     }
@@ -28,7 +28,42 @@ class User < ApplicationRecord
   end
 
   def test 
-    friends = User.joins(:friendships).where(friendships.user_id: )
+    #users.id != #{self.id} AND
+    # AND friendships.blocker != #{self.id}
+    #, (SELECT friendships.id FROM friendships WHERE users.id != #{self.id} AND (users.id = friendships.user_id OR users.id = friendships.friend_id)) AS friendship_id 
+
+    sql = "SELECT users.id, users.username
+           FROM users 
+           WHERE users.id != #{self.id} AND 
+           
+           CASE
+            WHEN NOT EXISTS(SELECT friendships.id FROM friendships
+                            WHERE users.id = friendships.user_id OR users.id = friendships.friend_id)
+            THEN
+              true
+            ELSE
+              CASE 
+                WHERE EXISTS(SELECT friendships.id FROM friendships 
+                  WHERE (users.id = friendships.user_id OR users.id = friendships.friend_id)
+                  AND
+                  CASE
+                    WHEN friendships.status = 'blocked' AND friendships.blocker = #{self.id}
+                    THEN true
+                    WHEN friendships.friend_id != #{self.id} AND friendships.user_id != #{self.id}
+                    THEN true
+                    ELSE false
+                  END
+                )
+                THEN true  
+                ELSE false
+              END
+           END;"
+    #sql = "SELECT username FROM users"
+    temp = []
+    temp << User.find_by_sql(sql)
+    #temp << User.select("users.* FROM users JOIN friendships ON users.id = friendships.user_id").where("friendships.status = 'friends' AND users.id != ?", self.id)
+    #temp << User.select("users.*, friendships.* FROM users JOIN friendships ON users.id = friendships.friend_id").where("friendships.status = 'friends' AND users.id != ?", self.id)
+
   end
   #Returns true if the user has at least one friends relation
   def has_friends?
@@ -152,3 +187,18 @@ class User < ApplicationRecord
   end
  
 end
+
+
+=begin 
+
+SELECT users.id, users.username, (SELECT friendships.id FROM friendships WHERE users.id = friendships.user_id or users.id = friendships.friend_id) AS friendship_id 
+FROM users 
+WHERE users.id != 1 AND (NOT EXISTS (SELECT friendships.id FROM friendships
+                  WHERE users.id = friendships.user_id OR users.id = friendships.friend_id)
+                  OR
+                  EXISTS(SELECT friendships.id FROM friendships
+                         WHERE (users.id = friendships.user_id OR users.id = friendships.friend_id) AND (friendships.status != 'blocked' OR friendships.blocker = 1)));
+
+JOIN friendships ON users.id = friendships.user_id OR users.id = friendships.friend_id
+                  
+=end
