@@ -41,23 +41,14 @@ class User < ApplicationRecord
                             WHERE users.id = friendships.user_id OR users.id = friendships.friend_id)
             THEN
               true
-            ELSE
-              CASE 
-                WHERE EXISTS(SELECT friendships.id FROM friendships 
-                  WHERE (users.id = friendships.user_id OR users.id = friendships.friend_id)
-                  AND
-                  CASE
-                    WHEN friendships.status = 'blocked' AND friendships.blocker = #{self.id}
-                    THEN true
-                    WHEN friendships.friend_id != #{self.id} AND friendships.user_id != #{self.id}
-                    THEN true
-                    ELSE false
-                  END
-                )
-                THEN true  
-                ELSE false
-              END
-           END;"
+            WHEN EXISTS(SELECT friendships.id FROM friendships
+                        WHERE users.id = friendships.user_id OR users.id = friendships.friend_id)
+            THEN
+               EXISTS(SELECT friendships.id FROM friendships
+                     WHERE (friendships.user_id != #{self.id} OR friendships.friend_id != #{self.id}) OR (friendships.status != 'blocked' OR friendships.blocker = #{self.id}))
+            ELSE false
+            
+            END;"
     #sql = "SELECT username FROM users"
     temp = []
     temp << User.find_by_sql(sql)
