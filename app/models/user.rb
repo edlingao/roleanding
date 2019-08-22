@@ -27,35 +27,6 @@ class User < ApplicationRecord
     users
   end
 
-  def test 
-    #users.id != #{self.id} AND
-    # AND friendships.blocker != #{self.id}
-    #, (SELECT friendships.id FROM friendships WHERE users.id != #{self.id} AND (users.id = friendships.user_id OR users.id = friendships.friend_id)) AS friendship_id 
-
-    sql = "SELECT users.id, users.username
-           FROM users 
-           WHERE users.id != #{self.id} AND 
-           
-           CASE
-            WHEN NOT EXISTS(SELECT friendships.id FROM friendships
-                            WHERE users.id = friendships.user_id OR users.id = friendships.friend_id)
-            THEN
-              true
-            WHEN EXISTS(SELECT friendships.id FROM friendships
-                        WHERE users.id = friendships.user_id OR users.id = friendships.friend_id)
-            THEN
-               EXISTS(SELECT friendships.id FROM friendships
-                     WHERE (friendships.user_id != #{self.id} OR friendships.friend_id != #{self.id}) OR (friendships.status != 'blocked' OR friendships.blocker = #{self.id}))
-            ELSE false
-            
-            END;"
-    #sql = "SELECT username FROM users"
-    temp = []
-    temp << User.find_by_sql(sql)
-    #temp << User.select("users.* FROM users JOIN friendships ON users.id = friendships.user_id").where("friendships.status = 'friends' AND users.id != ?", self.id)
-    #temp << User.select("users.*, friendships.* FROM users JOIN friendships ON users.id = friendships.friend_id").where("friendships.status = 'friends' AND users.id != ?", self.id)
-
-  end
   #Returns true if the user has at least one friends relation
   def has_friends?
     recived_sended = filter("friends")
