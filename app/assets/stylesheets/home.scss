@@ -8,14 +8,13 @@ $yellow: #FAFF81;
 $light-orange: #FFC53A;
 $orange: #E06D06;
 $light-brown: #B26700;
+$facebook-blue: #003AAB;
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Raleway', sans-serif;
-
-
 }
 body{
     background: linear-gradient(to bottom , $yellow, $light-orange);
@@ -32,7 +31,7 @@ body{
         justify-content: space-between;
         margin-top: 20px;
         padding: 0 25px;
-        
+//---Login form-------------------------------------------------------------------
         .login{
             width: 60%;
             
@@ -77,25 +76,113 @@ body{
             }
         }
     }
-
+//-Signup form-----------------------------------------------------------------------
     .main{
         margin-top: 10vh;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-column-gap: 20vh;
-        grid-template-rows: 70vh;
+        grid-column-gap: 15vh;
+        grid-template-rows: 75.7vh;
         padding: 0 40px;
         .signup{
+            
             background: $deep-blue;
             color: white;
-            padding: 40px;
+            padding: 0 40px;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
             align-items: center;
+            border-radius: 3vh;
+            .look-at-me-text{
+                h1{
+                    font-size: 60px;
+                }
+                align-self: flex-end;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                top: 0;
+                
+            }
+            .sign-up-with-facebook{
+                facebook{
+                    color: $facebook-blue;
+                    font-weight: bold;
+                }
+                font-size: 40px;
+                text-decoration: none;
+                color: $deep-blue;
+                background: $yellow;
+                padding: 10px 20px;
+                border-radius: 50vh;
+            }
+            .or{
+                font-size: 40px;
+            }
+            .signup-form{
+                height: 50%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items:flex-end ;
+                .field{
+                    font-size: 40px;
+                    input[type=text], input[type=password], input[type=email]{
+                        font-size: 25px;
+                        margin-left: 22px;
+                        border: 0;
+                        border-radius: 1vh;
+                        outline: none;
+                        text-align: center;
+                        padding: 10px 5vh;
+                    }
+                }
+                .password-confirmation{
+                    font-size: 25px;
+                    margin-bottom: 10px;
+                }
+                .signup-button{
+                    border: 0;
+                    font-size: 30px;
+                    padding: 10px;
+                    border-radius: 10vh;
+                    color: $deep-blue;
+                    background: $yellow;
+                }
+
+            }
         }
+
+    }
+//----White box text-----------------------------------------------------------------
+    .main{
         .presentation-text{
             background: white;
+            padding: 15px 40px;
+            border-radius: 3vh;
+            h1{
+                font-size: 49px;
+                margin-bottom: 24px;
+            }
+            .list-text{
+                font-size: 30px;
+                .description-text{
+                    margin-bottom: 20px;
+                }
+                ul{
+                    li{
+                        margin-bottom: 35px;
+                        .material-icons{
+                            color: $orange;
+                            font-size: 30px
+                        }
+                        .red{
+                            color: $red;
+                        }
+                    }
+                }
+            }
         }
     }
 }

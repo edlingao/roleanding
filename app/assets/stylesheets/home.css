@@ -93,16 +93,16 @@ body {
   display: grid;
   -ms-grid-columns: 1fr 1fr;
       grid-template-columns: 1fr 1fr;
-  grid-column-gap: 20vh;
-  -ms-grid-rows: 70vh;
-      grid-template-rows: 70vh;
+  grid-column-gap: 15vh;
+  -ms-grid-rows: 75.7vh;
+      grid-template-rows: 75.7vh;
   padding: 0 40px;
 }
 
 .container .main .signup {
   background: #161032;
   color: white;
-  padding: 40px;
+  padding: 0 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -115,9 +115,121 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  border-radius: 3vh;
+}
+
+.container .main .signup .look-at-me-text {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  top: 0;
+}
+
+.container .main .signup .look-at-me-text h1 {
+  font-size: 60px;
+}
+
+.container .main .signup .sign-up-with-facebook {
+  font-size: 40px;
+  text-decoration: none;
+  color: #161032;
+  background: #FAFF81;
+  padding: 10px 20px;
+  border-radius: 50vh;
+}
+
+.container .main .signup .sign-up-with-facebook facebook {
+  color: #003AAB;
+  font-weight: bold;
+}
+
+.container .main .signup .or {
+  font-size: 40px;
+}
+
+.container .main .signup .signup-form {
+  height: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.container .main .signup .signup-form .field {
+  font-size: 40px;
+}
+
+.container .main .signup .signup-form .field input[type=text], .container .main .signup .signup-form .field input[type=password], .container .main .signup .signup-form .field input[type=email] {
+  font-size: 25px;
+  margin-left: 22px;
+  border: 0;
+  border-radius: 1vh;
+  outline: none;
+  text-align: center;
+  padding: 10px 5vh;
+}
+
+.container .main .signup .signup-form .password-confirmation {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.container .main .signup .signup-form .signup-button {
+  border: 0;
+  font-size: 30px;
+  padding: 10px;
+  border-radius: 10vh;
+  color: #161032;
+  background: #FAFF81;
 }
 
 .container .main .presentation-text {
   background: white;
+  padding: 15px 40px;
+  border-radius: 3vh;
+}
+
+.container .main .presentation-text h1 {
+  font-size: 49px;
+  margin-bottom: 24px;
+}
+
+.container .main .presentation-text .list-text {
+  font-size: 30px;
+}
+
+.container .main .presentation-text .list-text .description-text {
+  margin-bottom: 20px;
+}
+
+.container .main .presentation-text .list-text ul li {
+  margin-bottom: 35px;
+}
+
+.container .main .presentation-text .list-text ul li .material-icons {
+  color: #E06D06;
+  font-size: 30px;
+}
+
+.container .main .presentation-text .list-text ul li .red {
+  color: #FF0000;
 }
 /*# sourceMappingURL=home.css.map */

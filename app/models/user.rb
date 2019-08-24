@@ -16,15 +16,24 @@ class User < ApplicationRecord
 
   
   def all_users
-    all_users = User.all
-    users = []
-    all_users.each{|user|
-      if user.id == self.id && !Friendship.exists?(user_id: user.id) || !Friendship.exists?(friend_id: user.id)
-        users << user
-      end
-    }
-
-    users
+    all_users = []
+    sql = "SELECT u.id, u.username
+           FROM users u 
+           WHERE u.id != #{self.id} AND NOT EXISTS(SELECT friendships.id FROM friendships WHERE (friendships.user_id = #{self.id} AND friendships.friend_id = u.id) OR (friendships.friend_id = #{self.id} AND friendships.user_id = u.id))"
+    unexistin_friendships = User.find_by_sql(sql)
+    sql = "SELECT u.id, u.username, f.id AS friendship_id, f.status
+           FROM users u JOIN friendships f ON (f.user_id = #{self.id} AND f.friend_id = u.id) OR (f.friend_id = #{self.id} AND f.user_id = u.id)
+           WHERE u.id != #{self.id} AND EXISTS(SELECT friendships.id FROM friendships WHERE (friendships.user_id = #{self.id} AND friendships.friend_id = u.id) OR (friendships.friend_id = #{self.id} AND friendships.user_id = u.id))
+           AND CASE
+           WHEN f.status = 'blocked' AND f.blocker != #{self.id}
+           THEN false
+           ELSE true
+           END
+           "
+    existin_friendships = User.find_by_sql(sql)
+    all_users << unexistin_friendships
+    all_users << existin_friendships
+    all_users.flatten!
   end
 
   #Returns true if the user has at least one friends relation
@@ -153,14 +162,14 @@ end
 
 =begin 
 
-SELECT users.id, users.username, (SELECT friendships.id FROM friendships WHERE users.id = friendships.user_id or users.id = friendships.friend_id) AS friendship_id 
-FROM users 
-WHERE users.id != 1 AND (NOT EXISTS (SELECT friendships.id FROM friendships
-                  WHERE users.id = friendships.user_id OR users.id = friendships.friend_id)
-                  OR
-                  EXISTS(SELECT friendships.id FROM friendships
-                         WHERE (users.id = friendships.user_id OR users.id = friendships.friend_id) AND (friendships.status != 'blocked' OR friendships.blocker = 1)));
+  SELECT users.id, users.username, (SELECT friendships.id FROM friendships WHERE users.id = friendships.user_id or users.id = friendships.friend_id) AS friendship_id 
+  FROM users 
+  WHERE users.id != 1 AND (NOT EXISTS (SELECT friendships.id FROM friendships
+                    WHERE users.id = friendships.user_id OR users.id = friendships.friend_id)
+                    OR
+                    EXISTS(SELECT friendships.id FROM friendships
+                          WHERE (users.id = friendships.user_id OR users.id = friendships.friend_id) AND (friendships.status != 'blocked' OR friendships.blocker = 1)));
 
-JOIN friendships ON users.id = friendships.user_id OR users.id = friendships.friend_id
-                  
+  JOIN friendships ON users.id = friendships.user_id OR users.id = friendships.friend_id
+                    
 =end

@@ -1,0 +1,64 @@
+
+<div class = "container">
+
+    <header class = "main-header">
+            <div class = "logo">
+            <%= link_to image_tag("RoleandingLogo.svg", class: "logo"), root_path %>  
+            </div>
+            <div class="user-functions" style = 'background: white;'>
+                <div class = "function">
+                   <%= link_to root_path do%>
+                    <i class="material-icons">search</i>
+                   <%end%> 
+                </div>
+                <div class = "function">
+                    <%= link_to root_path do%>
+                        <i class="material-icons">person_outline</i>
+                    <%end%>
+                </div>
+                <div class = "function">
+                    <%= link_to root_path do%>
+                        <i class="material-icons">edit</i>
+                    <%end%>
+                </div>
+                <div class = "function">
+                    <%= link_to root_path do%>
+                        <i class="material-icons">notifications</i>
+                    <%end%>
+                </div>
+                <div class = "function">
+                    <%= link_to root_path do%>
+                        <i class="material-icons">exit_to_app</i>
+                    <%end%>
+                </div>
+            </div>
+    </header>
+
+
+
+
+    <%= link_to  "Logout", destroy_user_session_path, method: :delete %>
+
+    <%= current_user.username%>
+
+    <h1>Friends</h1>
+    <%if @user.has_friends?%>
+        <%@friends.each do |recived_and_sended_friends|%>
+            <%recived_and_sended_friends.each do |user_friendship|%>
+            <%user = user_friendship[0]%>
+            <%friendship = user_friendship[1]%>
+                <h3><%=user.username%></h3>
+            <%end%>
+        <%end%>
+    <%else%>
+        <i>No friends yet!<i>
+    <%end%>
+    <h1>Blocked</h1>
+    <%@blocked.each do |recived_and_sended_blockeds|%>
+        <%recived_and_sended_blockeds.each do |user_friendship|%>
+            <%user = user_friendship[0]%>
+            <%friendship = user_friendship[1]%>
+            <h3><%=user.username%><h3>
+        <%end%>
+    <%end%>
+</div>
