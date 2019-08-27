@@ -4,10 +4,11 @@ class HomeController < ApplicationController
     
     if user_signed_in?
       @user = current_user
-      @friends = @user.filter_friends
+      @friends = @user.all_friends
       @pending = @user.pending
       @blocked = @user.blocked
-      #@users = User.all
+      @posts = @user.relevant_posts
+      @new_post = Post.new
     end
   end
 end

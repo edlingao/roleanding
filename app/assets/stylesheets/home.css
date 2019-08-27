@@ -199,6 +199,7 @@ body {
   border-radius: 10vh;
   color: #161032;
   background: #FAFF81;
+  cursor: pointer;
 }
 
 .container .main .presentation-text {
@@ -231,5 +232,179 @@ body {
 
 .container .main .presentation-text .list-text ul li .red {
   color: #FF0000;
+}
+
+.container .user-functions {
+  width: 40%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .user-functions .function {
+  height: 110px;
+  width: 110px;
+  background: #161032;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-decoration: none;
+  border-radius: 100%;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+.container .user-functions .function:hover {
+  background: #FFC53A;
+  -webkit-transition: .30s;
+  transition: .30s;
+}
+
+.container .user-functions .function i {
+  font-size: 100px;
+  color: white;
+}
+
+.container .feed-container {
+  width: 95%;
+  margin: 100px auto;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 3fr;
+      grid-template-columns: 1fr 3fr;
+      grid-template-areas: "form-post form-post" "friends feed";
+  grid-column-gap: 40px;
+}
+
+.container .feed-container .feed {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: feed;
+}
+
+.container .feed-container .friend-list {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: friends;
+  background: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  padding: 35px;
+  border-radius: 3vh;
+}
+
+.container .feed-container .friend-list .friend {
+  height: 70px;
+  width: 40%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-bottom: 87px;
+}
+
+.container .feed-container .friend-list .friend p {
+  font-size: 25px;
+}
+
+.container .feed-container .friend-list .friend .profile-pic {
+  width: 71px;
+}
+
+.container .feed-container .friend-list h1 {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  justify-self: flex-start;
+  font-size: 50px;
+  margin-bottom: 65px;
+}
+
+.container .feed-container .post-form {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: form-post;
+}
+
+.container .feed-container form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.container .feed-container form input[type=text] {
+  width: 100%;
+  height: 120px;
+  border: 0;
+  border-radius: 3vh;
+  font-size: 40px;
+  padding: 10px 30px;
+  outline: none;
+}
+
+.container .feed-container form .left {
+  margin-top: 20px;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  background: white;
+  padding: 8px 15px;
+  border-radius: 2vh;
+}
+
+.container .feed-container form .left button {
+  border: 0;
+  background: 0, 0, 0, 0;
+  cursor: pointer;
+  outline: none;
+}
+
+.container .feed-container form .left i {
+  font-size: 64px;
+}
+
+.container .feed-container form .left .insert-photo i {
+  color: #FFC53A;
+}
+
+.container .feed-container form .left .create-post i {
+  color: #B26700;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
 }
 /*# sourceMappingURL=home.css.map */

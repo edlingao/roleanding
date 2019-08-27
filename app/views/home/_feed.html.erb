@@ -1,64 +1,49 @@
 
 <div class = "container">
-
-    <header class = "main-header">
-            <div class = "logo">
-            <%= link_to image_tag("RoleandingLogo.svg", class: "logo"), root_path %>  
-            </div>
-            <div class="user-functions" style = 'background: white;'>
-                <div class = "function">
-                   <%= link_to root_path do%>
-                    <i class="material-icons">search</i>
-                   <%end%> 
+    <%= render 'header'%>
+    <div class = "feed-container">
+        <div class = "post-form">
+            <%= form_for(@new_post) do |f| %>
+                <%=f.text_field :content, autofocus:true, autocomplete: 'off', placeholder: "What are you going to share today?"%>
+                <div class="left">
+                    <%= f.button class: "insert-photo" do%>
+                        <i class="material-icons">insert_photo</i>
+                    <% end %>
+                    
+                    <%=f.button  class: "create-post" do%>
+                        <i class="material-icons">navigation</i>
+                    <% end %>
                 </div>
-                <div class = "function">
-                    <%= link_to root_path do%>
-                        <i class="material-icons">person_outline</i>
-                    <%end%>
-                </div>
-                <div class = "function">
-                    <%= link_to root_path do%>
-                        <i class="material-icons">edit</i>
-                    <%end%>
-                </div>
-                <div class = "function">
-                    <%= link_to root_path do%>
-                        <i class="material-icons">notifications</i>
-                    <%end%>
-                </div>
-                <div class = "function">
-                    <%= link_to root_path do%>
-                        <i class="material-icons">exit_to_app</i>
-                    <%end%>
-                </div>
-            </div>
-    </header>
+                <%= f.submit "", style: "display: none;"%>
+            <% end %>
+        </div>
 
-
-
-
-    <%= link_to  "Logout", destroy_user_session_path, method: :delete %>
-
-    <%= current_user.username%>
-
-    <h1>Friends</h1>
-    <%if @user.has_friends?%>
-        <%@friends.each do |recived_and_sended_friends|%>
-            <%recived_and_sended_friends.each do |user_friendship|%>
-            <%user = user_friendship[0]%>
-            <%friendship = user_friendship[1]%>
-                <h3><%=user.username%></h3>
+        <main class="feed">
+            <%@posts.each do |post|%>
+                <p><%=post.content%> <%= link_to "Delete post", post_path(post),  method: :delete%> </p><br>
+                <% if post.comments != [] %>
+                    <p>Frist comment from <%= post.content %>: <%=post.comments.first.content %><p><br>
+                    <p>Author of the comment: <%=User.find(post.comments.first.user_id).username%></p>
+                <% else %>
+                    <p>Frist comment from <%= post.content %>: <i>No comments yet<i><p><br>
+                <% end %>
+               
+            <% end %>
+        </main>
+        <aside class = "friend-list">
+            <h1>Friends</h1>
+            <%if @user.has_friends?%>
+                <%@friends.each do |friend|%>
+                    <div class="friend">
+                        <%=image_tag "https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png", class:"profile-pic"%>
+                        <p><%=friend.username%></p>
+                    </div>
+                <%end%>
+            <%else%>
+                <i>No friends yet!<i>
             <%end%>
-        <%end%>
-    <%else%>
-        <i>No friends yet!<i>
-    <%end%>
-    <h1>Blocked</h1>
-    <%@blocked.each do |recived_and_sended_blockeds|%>
-        <%recived_and_sended_blockeds.each do |user_friendship|%>
-            <%user = user_friendship[0]%>
-            <%friendship = user_friendship[1]%>
-            <h3><%=user.username%><h3>
-        <%end%>
-    <%end%>
+        </aside>
+
+    </div>
+
 </div>

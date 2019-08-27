@@ -12,7 +12,8 @@ class User < ApplicationRecord
   has_many :friends,  through: :friendships
   has_many :inverse_friendships, class_name: "Friendship", foreign_key: "friend_id"
   has_many :inverse_friends, through: :inverse_friendships, source: :user
-
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   
   def all_users
@@ -20,7 +21,7 @@ class User < ApplicationRecord
     sql = "SELECT u.id, u.username
            FROM users u 
            WHERE u.id != #{self.id} AND NOT EXISTS(SELECT friendships.id FROM friendships WHERE (friendships.user_id = #{self.id} AND friendships.friend_id = u.id) OR (friendships.friend_id = #{self.id} AND friendships.user_id = u.id))"
-    unexistin_friendships = User.find_by_sql(sql)
+    unexisting_friendships = User.find_by_sql(sql)
     sql = "SELECT u.id, u.username, f.id AS friendship_id, f.status
            FROM users u JOIN friendships f ON (f.user_id = #{self.id} AND f.friend_id = u.id) OR (f.friend_id = #{self.id} AND f.user_id = u.id)
            WHERE u.id != #{self.id} AND EXISTS(SELECT friendships.id FROM friendships WHERE (friendships.user_id = #{self.id} AND friendships.friend_id = u.id) OR (friendships.friend_id = #{self.id} AND friendships.user_id = u.id))
@@ -30,146 +31,61 @@ class User < ApplicationRecord
            ELSE true
            END
            "
-    existin_friendships = User.find_by_sql(sql)
-    all_users << unexistin_friendships
-    all_users << existin_friendships
+    existing_friendships = User.find_by_sql(sql)
+    all_users << unexisting_friendships
+    all_users << existing_friendships
     all_users.flatten!
   end
 
-  #Returns true if the user has at least one friends relation
+
+  def relevant_posts
+    sql = "SELECT u.id, u.username, p.id, p.content, p.created_at
+    FROM users u 
+    JOIN friendships f ON (f.user_id = #{self.id} AND f.friend_id = u.id) OR (f.friend_id = #{self.id} AND f.user_id = u.id)
+    JOIN posts p ON p.user_id = u.id
+    WHERE f.status = 'friends'
+    ORDER BY p.created_at DESC"
+
+    posts = Post.find_by_sql(sql)
+   
+  end
+  def own_posts
+    sql = "SELECT u.id, u.username, p.id, p.content, p.created_at
+           FROM users u 
+           JOIN posts p ON p.user_id = u.id
+           WHERE u.id = #{self.id}
+           ORDER BY p.created_at DESC"
+    posts = Post.find_by_sql(sql)
+  end
+
+  #Returns our friend user_id and user name, also returns a friendship_id and the status Only where the status is 'friends' 
+  def all_friends
+    sql = "SELECT u.id, u.username, f.id AS friendship_id, f.status
+           FROM users u JOIN friendships f ON (f.user_id = #{self.id} AND f.friend_id = u.id) OR (f.friend_id = #{self.id} AND f.user_id = u.id)
+           WHERE u.id != #{self.id} AND f.status = 'friends'"  
+    friends = User.find_by_sql(sql)
+  end
+  #Returns true if the user has at least one friendship with status = 'friends' 
   def has_friends?
-    recived_sended = filter("friends")
-    return false if recived_sended == [nil]
+    recived_sended = self.all_friends
+    return false if recived_sended == []
     true
   end
-
-=begin
-  Returns an array with the friennndships with status = "friends" if there are no friends it returns nil
-  ex: 
-    [
-      Array of recived friendships
-      [
-        Array with the user and the freindship
-        [User, Friendship],
-        [User, Friendship]
-      ],
-  
-      Array of sended friendships
-      [ 
-        Array with the user and the freindship
-        [User, Friendship],
-        [User, Friendship]
-      ]
-  
-    ]   
-=end
-  def filter_friends
-    if self.has_friends?
-      friendships = filter("friends")
-      recived = []
-      temp = []
-      sended =[]
-      friends = []
-      friendships.each {|array_of_sended_or_recived|
-
-        array_of_sended_or_recived.each{|friendship|
-          if friendship.user_id != self.id
-            temp << User.find(friendship.user_id)
-            temp << friendship
-
-            recived << temp
-          else
-            temp << User.find(friendship.friend_id)
-            temp << friendship
-            sended << temp
-          end
-          temp = []
-        }
-
-      }
-      friends << recived
-      friends << sended
-      return friends
-    else
-      return [nil]
-    end
-    
-  end
-=begin
-  Returns an array containing the friendship and the user with the blocked information
-  ex:
-      [
-        Recived Friendships array
-        [user, friendship],
-        [user, friendship]
-      [
-      ],
-        Sended Friendships array
-        [user, friendship],
-        [user, friendship]
-      ]
-=end
+  #returns every user that
   def blocked
-    temp = []
-    recived_fs = []
-    sended_fs =[]
-    blockeds = []
-    
-    blockeds_fs = Friendship.where status: "blocked", blocker: self.id
-    blockeds_fs.each {|friendship|
-      if friendship.user_id != self.id
-        temp << User.find(friendship.user_id)
-        temp << friendship
-
-        recived_fs << temp
-      else
-        temp << User.find(friendship.friend_id)
-        temp << friendship
-        sended_fs << temp
-      end
-      temp = []
-    }
-    blockeds << recived_fs
-    blockeds << sended_fs
-    return blockeds
+    sql = "SELECT u.id, u.username, f.id AS friendship_id, f.status
+           FROM users u JOIN friendships f ON (f.user_id = #{self.id} AND f.friend_id = u.id) OR (f.friend_id = #{self.id} AND f.user_id = u.id)
+           WHERE u.id != #{self.id} AND f.status = 'blocked' AND f.blocker = #{self.id}"  
+    blocked = User.find_by_sql(sql)
   end
   
   #returns the inverse_friendships with status = "waiting"
   #Or returns every frienship to confirm
 
   def pending
-    pending = Friendship.where status: 'waiting', friend_id: self.id
+    pending = Friendship.where(status: 'waiting', friend_id: self.id)
     return pending
   end
-=begin
-  Returns every frienship relation between the current user and the friend users by the status sended
-  [  
-    [Array of recived friendships]
-    [Array of sended friendships]
-  ]
-=end
-  def filter(status)
 
-    friendship = []
-    friendship << Friendship.where(status: status, friend_id: self.id)
-    friendship << Friendship.where(status: status, user_id: self.id)
-    return friendship if friendship != [[],[]] 
-    [nil]
-  end
- 
+
 end
-
-
-=begin 
-
-  SELECT users.id, users.username, (SELECT friendships.id FROM friendships WHERE users.id = friendships.user_id or users.id = friendships.friend_id) AS friendship_id 
-  FROM users 
-  WHERE users.id != 1 AND (NOT EXISTS (SELECT friendships.id FROM friendships
-                    WHERE users.id = friendships.user_id OR users.id = friendships.friend_id)
-                    OR
-                    EXISTS(SELECT friendships.id FROM friendships
-                          WHERE (users.id = friendships.user_id OR users.id = friendships.friend_id) AND (friendships.status != 'blocked' OR friendships.blocker = 1)));
-
-  JOIN friendships ON users.id = friendships.user_id OR users.id = friendships.friend_id
-                    
-=end
