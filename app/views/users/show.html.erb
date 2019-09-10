@@ -1,0 +1,16 @@
+
+<div class = "feed-container user-show">
+    <div class = "user-info">
+
+        <%=image_tag(@public_user.profile_pic.url, class:"profile-pic") %>
+        <h1><%=@public_user.username.capitalize%></h1>
+        
+    </div>
+    <main class="feed">
+        <%= render "shared/posts"%>
+    </main>
+    <aside class="friend-list">
+        <%= render "shared/friends"%>
+    </aside>
+
+</div>

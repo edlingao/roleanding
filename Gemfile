@@ -4,6 +4,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.1'
 
 gem 'devise'
+gem 'paperclip-cloudinary'
+gem "paperclip", "~> 6.0.0"
+gem 'omniauth-facebook'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

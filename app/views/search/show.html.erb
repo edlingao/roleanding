@@ -1,0 +1,27 @@
+<!-- ACCEPT FRIENSHIP LINKS -->
+<main class="people notification-add">
+    <% @people.each do |person| %>
+        <div class="person">
+            <div class="person-links">
+                <%=link_to image_tag(person.profile_pic.url), username_path(person.username)%>
+                <h1><%= person.username.capitalize%></h1>
+            </div>
+            <div class="accept-links">
+
+                <%= link_to friendship_path(id: person.friendship_id, status: "friends"), method: :put do %>
+                    <i class="material-icons">check</i>
+                <% end %>
+
+                <%= link_to friendship_path(person.friendship_id), method: :delete,  class: "reject" do %>
+                    <i class="material-icons">close</i>
+                <% end %>
+
+            </div>
+        </div>
+    <% end %>
+    <% if @people == [] %>
+        <div class="cero-notification-message">
+            <i>Nothing to see here pal...</i>
+        </div>
+    <% end %>
+</main>

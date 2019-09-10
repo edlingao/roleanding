@@ -1,0 +1,60 @@
+<!-- SEARCH PEOPLE FOR BLOCKING AND SENDING FRIENDSHIP NOTIFICATION -->
+
+<div class="search-bar">
+    <%= render 'search'%>
+</div>
+    
+<main class="people">
+    <% @people.each do |person| %>
+        <div class="person">
+            <div class="person-links">
+                <%=link_to image_tag(person.profile_pic.url), username_path(person.username)%>
+                <h1><%= person.username.capitalize%></h1>
+            </div>
+            <div class="friend-links">
+                
+
+                <% if person.try(:status)%>
+                    <% if person.status == 'blocked' %>
+                        <%= link_to friendship_path(friend: person, id: person.friendship_id), method: :delete, class: "unblock" do %>
+                            <i class="material-icons">cancel</i>
+                        <% end %>
+                    <% else %>
+                        <%= link_to friendship_path(id: person.friendship_id, status: "blocked", from: "search"), data: {confirm: "Do you want to block #{person.username.capitalize}?"}, method: :put, class: "blocked" do %>
+                            <i class="material-icons">block</i>
+                        <% end %>
+                    <% end %>
+                    
+                    <%case person.status%>
+                        <%when "friends"%>
+                            <%= link_to friendship_path(friend: person, id: person.friendship_id), method: :delete, data: {confirm: "Cancel friendship with #{person.username.capitalize}?"}, class: "delete-person" do %>
+                                <i class="material-icons">person_add_disabled</i>
+                            <% end %>
+                        <%when "waiting"%>
+                            <%= link_to friendship_path(friend: person, id: person.friendship_id), method: :delete, data: {confirm: "Cancel friendship request?"}, class: "waiting" do %>
+                                <i class="material-icons">access_time</i>
+                            <% end %>
+                            
+                            
+                    <% end %>
+                    
+                <% else %>
+                    <%= link_to friendships_path(friend_id: person, blocked: 'yes'), method: :post, data: {confirm: "Do you want to block #{person.username.capitalize}?"}, class: "blocked" do %>
+                        <i class="material-icons">block</i>
+                    <% end %>
+                    <%= link_to friendships_path(friend_id: person), method: :post, class: "add-person" do %>
+                        <i class="material-icons">person_add</i>
+                    <% end %>
+                <% end %>
+                
+                
+            </div>
+        </div>
+    <% end %>
+    <% if @people == [] %>
+        <div class="not-found">
+            <i>Who?<br>Perhaps you misspelled</i>
+        </div>
+<% end %>
+</main>
+

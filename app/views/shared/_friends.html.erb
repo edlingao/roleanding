@@ -1,0 +1,16 @@
+
+<h1>Friends</h1>
+
+<%us = @user if @public_user.nil?%>
+<%us ||= @public_user%>
+
+<%if us.has_friends?%>
+    <%@friends.each do |friend|%>
+        <div class="friend">
+            <%=link_to image_tag(friend.profile_pic.url, class:"profile-pic"), username_path(friend.username) %>
+            <p><%=friend.username%></p>
+        </div>
+    <%end%>
+<%else%>
+    <i>No friends yet!</i>
+<%end%>

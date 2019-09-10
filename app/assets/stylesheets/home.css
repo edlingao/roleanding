@@ -4,6 +4,11 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-family: 'Raleway', sans-serif;
+  color: #161032;
+}
+
+.hidden {
+  display: none;
 }
 
 body {
@@ -57,6 +62,10 @@ body {
   -ms-flex-pack: distribute;
       justify-content: space-around;
   font-size: 35px;
+}
+
+.container .main-header .login form label {
+  color: white;
 }
 
 .container .main-header .login form input[type=email], .container .main-header .login form input[type=password] {
@@ -118,6 +127,10 @@ body {
   border-radius: 3vh;
 }
 
+.container .main .signup label {
+  color: white;
+}
+
 .container .main .signup .look-at-me-text {
   -ms-flex-item-align: end;
       align-self: flex-end;
@@ -136,6 +149,7 @@ body {
 
 .container .main .signup .look-at-me-text h1 {
   font-size: 60px;
+  color: white;
 }
 
 .container .main .signup .sign-up-with-facebook {
@@ -154,6 +168,7 @@ body {
 
 .container .main .signup .or {
   font-size: 40px;
+  color: white;
 }
 
 .container .main .signup .signup-form {
@@ -247,6 +262,10 @@ body {
           align-items: center;
 }
 
+.container .user-functions .noti {
+  position: relative;
+}
+
 .container .user-functions .function {
   height: 110px;
   width: 110px;
@@ -277,6 +296,31 @@ body {
   color: white;
 }
 
+.container .user-functions .function .notifications {
+  background: #FF0000;
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  border-radius: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  right: -20px;
+  top: 0;
+}
+
+.container .user-functions .function .notifications p {
+  font-size: 35px;
+  color: white;
+  font-weight: bold;
+}
+
 .container .feed-container {
   width: 95%;
   margin: 100px auto;
@@ -289,9 +333,226 @@ body {
 }
 
 .container .feed-container .feed {
-  -ms-grid-row: 2;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
   -ms-grid-column: 2;
   grid-area: feed;
+}
+
+.container .feed-container .feed .post {
+  background: white;
+  margin-bottom: 40px;
+  border-radius: 2vh;
+  padding: 30px 40px;
+}
+
+.container .feed-container .feed .post .post-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .feed-container .feed .post .post-header brown {
+  color: #B26700;
+}
+
+.container .feed-container .feed .post .post-header h1 {
+  font-size: 60px;
+  font-weight: 100;
+}
+
+.container .feed-container .feed .post .post-header img {
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  border-radius: 2vh;
+}
+
+.container .feed-container .feed .post .post-content {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.container .feed-container .feed .post .post-content .edit-post form textarea {
+  background: #161032;
+  color: white;
+}
+
+.container .feed-container .feed .post .post-content .edit-post form .left {
+  background: #161032;
+}
+
+.container .feed-container .feed .post .post-content .edit-post .image-preview {
+  margin-bottom: 50px;
+}
+
+.container .feed-container .feed .post .post-content .edit-post .image-preview img {
+  width: 90%;
+}
+
+.container .feed-container .feed .post .post-content img {
+  width: 100%;
+  margin-bottom: 50px;
+  background-size: cover;
+}
+
+.container .feed-container .feed .post .post-content .post-description p {
+  font-size: 35px;
+  margin-bottom: 40px;
+}
+
+.container .feed-container .feed .post .comments {
+  background: #B26700;
+  padding: 25px;
+  border-radius: 2vh;
+}
+
+.container .feed-container .feed .post .comments .comment img {
+  width: 75px;
+  height: 75px;
+  background-size: cover;
+  border-radius: 1vh;
+  margin-right: 20px;
+}
+
+.container .feed-container .feed .post .comments .comment .comment-author {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .feed-container .feed .post .comments .comment .comment-author h3 {
+  color: white;
+  font-weight: 100;
+  font-size: 30px;
+}
+
+.container .feed-container .feed .post .comments .comment .comment-content {
+  padding: 10px 20px;
+  background: #FFC53A;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 2vh;
+  text-align: center;
+}
+
+.container .feed-container .feed .post .comments .comment .comment-content p {
+  font-size: 25px;
+}
+
+.container .feed-container .feed .post .comment-form-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .feed-container .feed .post .new-comment-form {
+  margin-top: 30px;
+  background: #161032;
+  width: 80%;
+  padding: 12px 20px;
+  border-radius: 2vh;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.container .feed-container .feed .post .new-comment-form form {
+  width: 93%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.container .feed-container .feed .post .new-comment-form form textarea {
+  padding: 13px;
+  height: 55px;
+  font-size: 21px;
+  border-radius: 1.5vh;
+  width: 100%;
+}
+
+.container .feed-container .feed .post .new-comment-form form button {
+  border: 0;
+  width: 85px;
+  height: 40px;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  margin-top: 10px;
+  border-radius: .5vh;
+  background: #FFC53A;
+}
+
+.container .feed-container .feed .post .new-comment-form form button i {
+  font-size: 40px;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+.container .feed-container .feed .post .new-comment-form .comment-user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 20px;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+.container .feed-container .feed .post .new-comment-form .comment-user img {
+  height: 50px;
+  width: 50px;
+  border-radius: 1vh;
+  margin-right: 10px;
+}
+
+.container .feed-container .feed .post .new-comment-form .comment-user p {
+  color: #B26700;
+  font-size: 25px;
 }
 
 .container .feed-container .friend-list {
@@ -306,19 +567,19 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
   padding: 35px;
-  border-radius: 3vh;
+  border-radius: 2vh;
 }
 
 .container .feed-container .friend-list .friend {
   height: 70px;
-  width: 40%;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -329,8 +590,9 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   margin-bottom: 87px;
 }
 
@@ -339,7 +601,10 @@ body {
 }
 
 .container .feed-container .friend-list .friend .profile-pic {
-  width: 71px;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  margin-right: 10px;
 }
 
 .container .feed-container .friend-list h1 {
@@ -356,6 +621,78 @@ body {
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
   grid-area: form-post;
+  position: relative;
+}
+
+.container .feed-container .post-form .hide-image-preview {
+  -webkit-animation: post-hide forwards;
+          animation: post-hide forwards;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+}
+
+.container .feed-container .post-form .show-image-preview {
+  -webkit-animation: post-show;
+          animation: post-show;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+}
+
+.container .feed-container .post-form .image-preview {
+  position: absolute;
+  height: 700px;
+  width: 900px;
+  background: #161032;
+  top: 130px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 3vh;
+}
+
+.container .feed-container .post-form .image-preview img {
+  max-height: 70%;
+  border-radius: 4vh;
+}
+
+.container .feed-container .post-form .image-preview h1 {
+  color: white;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.container .feed-container .post-form .image-preview .close-button {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  height: 65px;
+  width: 65px;
+  background: #FF0000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: .5vh;
+  cursor: pointer;
+}
+
+.container .feed-container .post-form .image-preview .close-button i {
+  font-size: 60px;
+  color: white;
 }
 
 .container .feed-container form {
@@ -368,18 +705,20 @@ body {
           flex-direction: column;
 }
 
-.container .feed-container form input[type=text] {
+.container .feed-container form textarea {
   width: 100%;
   height: 120px;
   border: 0;
   border-radius: 3vh;
   font-size: 40px;
-  padding: 10px 30px;
+  padding: 35px 30px;
   outline: none;
+  resize: none;
 }
 
 .container .feed-container form .left {
   margin-top: 20px;
+  margin-bottom: 20px;
   -ms-flex-item-align: end;
       align-self: flex-end;
   background: white;
@@ -400,11 +739,609 @@ body {
 
 .container .feed-container form .left .insert-photo i {
   color: #FFC53A;
+  cursor: pointer;
 }
 
 .container .feed-container form .left .create-post i {
   color: #B26700;
   -webkit-transform: rotate(-90deg);
           transform: rotate(-90deg);
+}
+
+.container .solo-post {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .solo-post .feed {
+  width: 80%;
+}
+
+@-webkit-keyframes move {
+  0% {
+    top: -100vh;
+  }
+  100% {
+    top: 0px;
+  }
+}
+
+@keyframes move {
+  0% {
+    top: -100vh;
+  }
+  100% {
+    top: 0px;
+  }
+}
+
+@-webkit-keyframes back-move {
+  0% {
+    top: 0px;
+  }
+  100% {
+    top: -100vh;
+  }
+}
+
+@keyframes back-move {
+  0% {
+    top: 0px;
+  }
+  100% {
+    top: -100vh;
+  }
+}
+
+@-webkit-keyframes post-show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes post-show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes post-hide {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+@keyframes post-hide {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.container .back-anim {
+  -webkit-animation: back-move forwards;
+          animation: back-move forwards;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+}
+
+.container .anim {
+  -webkit-animation: move;
+          animation: move;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+}
+
+.container .change-pic-form {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(30%, #FAFF81), to(rgba(0, 0, 0, 0)));
+  background: linear-gradient(#FAFF81 30%, rgba(0, 0, 0, 0));
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.container .change-pic-form img {
+  height: 500px;
+  width: 500px;
+  border-radius: 2vh;
+}
+
+.container .change-pic-form .preview {
+  height: 600px;
+  width: 600px;
+  background: #161032;
+  border-radius: 2vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+
+.container .change-pic-form .preview .close-button {
+  position: absolute;
+  top: 10px;
+  right: -70px;
+  background: #FF0000;
+  border-radius: 1vh;
+  cursor: pointer;
+}
+
+.container .change-pic-form .preview .close-button i {
+  font-size: 64px;
+  color: white;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.container .change-pic-form .buttons {
+  width: 600px;
+}
+
+.container .change-pic-form .buttons form {
+  margin-top: 20px;
+  widows: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .change-pic-form .buttons form label {
+  background: #FFC53A;
+  cursor: pointer;
+  height: 80px;
+  width: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 2vh;
+}
+
+.container .change-pic-form .buttons form label i {
+  color: #161032;
+  font-size: 64px;
+}
+
+.container .change-pic-form .buttons form button {
+  border: 0;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+  background: #FFC53A;
+  cursor: pointer;
+  outline: none;
+  height: 100px;
+  width: 70px;
+  border-radius: 2vh;
+}
+
+.container .change-pic-form .buttons form button i {
+  font-size: 64px;
+  color: #161032;
+}
+
+.container .user-show {
+      grid-template-areas: "user-info feed" "friends feed";
+  grid-row-gap: 40px;
+  -ms-grid-rows: 500px;
+      grid-template-rows: 500px;
+  position: relative;
+}
+
+.container .user-show .user-info {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: user-info;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: white;
+  border-radius: 3vh;
+  padding: 32px 0px;
+  height: 500px;
+  width: 500px;
+  position: relative;
+}
+
+.container .user-show .user-info brown {
+  color: #B26700;
+  font-weight: 100;
+}
+
+.container .user-show .user-info img {
+  height: 350px;
+  width: 350px;
+  background-size: cover;
+  border-radius: 2vh;
+  margin-bottom: 25px;
+}
+
+.container .user-show .user-info h1 {
+  font-size: 50px;
+  font-weight: 900;
+}
+
+.container .user-show .user-info .change-profile-pic {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background: #161032;
+  border-radius: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  bottom: 10px;
+  right: 14px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.container .user-show .user-info .change-profile-pic i {
+  color: #FAFF81;
+  font-size: 64px;
+}
+
+.container .search-bar {
+  width: 100%;
+  margin: auto;
+  margin-top: 90px;
+  margin-bottom: 70px;
+  padding: 0px 30px;
+}
+
+.container .search-bar form {
+  width: 100%;
+  position: relative;
+}
+
+.container .search-bar form input[type=text] {
+  width: 100%;
+  height: 144px;
+  border: 0;
+  border-radius: 3vh;
+  padding: 50px 40px;
+  font-size: 40px;
+}
+
+.container .search-bar form button {
+  position: absolute;
+  right: 40px;
+  top: 25px;
+  height: 100px;
+  width: 100px;
+  border: 0;
+  background: #161032;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.container .search-bar form button i {
+  font-size: 64px;
+  color: #FAFF81;
+}
+
+.container .people {
+  width: 80%;
+  margin: auto;
+}
+
+.container .people .not-found {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .people .not-found i {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  font-size: 60px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.container .people .person {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: white;
+  margin-bottom: 20px;
+  padding: 15px 20px;
+  border-radius: 3vh;
+}
+
+.container .people .person .person-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.container .people .person .person-links h1 {
+  margin-left: 15px;
+  font-weight: 100;
+  margin-top: 10px;
+}
+
+.container .people .person .person-links img {
+  height: 150px;
+  width: 150px;
+  background-size: contain;
+  border-radius: 2vh;
+}
+
+.container .people .person .friend-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  flex-direction: row-reverse;
+}
+
+.container .people .person .friend-links .add-person, .container .people .person .friend-links .waiting, .container .people .person .friend-links .delete-person {
+  margin-right: 40px;
+}
+
+.container .people .person .friend-links .blocked {
+  background: #B26700;
+}
+
+.container .people .person .friend-links .blocked i {
+  font-size: 90px;
+}
+
+.container .people .person .friend-links .unblock {
+  background: #161032;
+}
+
+.container .people .person .friend-links .unblock i {
+  font-size: 90px;
+}
+
+.container .people .person .friend-links a, .container .people .person .friend-links .waiting {
+  width: 200px;
+  height: 100px;
+  background: #FFC53A;
+  text-decoration: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .people .person .friend-links a i, .container .people .person .friend-links .waiting i {
+  font-size: 120px;
+  color: white;
+}
+
+.container .people .person .friend-links .waiting {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background: #E06D06;
+}
+
+.container .people .person .friend-links .waiting i {
+  font-size: 90px;
+}
+
+.container .people .person .friend-links .delete-person {
+  background: #E06D06;
+}
+
+.container .notification-add {
+  margin-top: 120px;
+}
+
+.container .notification-add .cero-notification-message {
+  margin-top: 100px;
+}
+
+.container .notification-add .cero-notification-message i {
+  font-size: 10rem;
+  font-weight: 900;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: auto;
+}
+
+.container .notification-add .accept-links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.container .notification-add .accept-links a {
+  background: #FFC53A;
+  text-decoration: none;
+  width: 200px;
+  height: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container .notification-add .accept-links a i {
+  font-size: 120px;
+  color: white;
+}
+
+.container .notification-add .accept-links .reject {
+  background: #FF0000;
+  margin-left: 40px;
+}
+
+@media screen and (max-width: 1366px) {
+  .container .main-header .login {
+    padding: 0px 20px;
+  }
+  .container .main-header .login form input[type=email], .container .main-header .login form input[type=submit], .container .main-header .login form input[type=password], .container .main-header .login form label {
+    font-size: 1.2rem;
+  }
+  .container .main .presentation-text .list-text .description-text {
+    font-size: 1.2rem;
+  }
+  .container .main .presentation-text .list-text ul li {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+  .container .main .presentation-text .list-text ul li .material-icons {
+    font-size: 25px;
+  }
+  .container .main .signup .look-at-me-text h1 {
+    font-size: 40px;
+  }
+  .container .main .signup .sign-up-with-facebook {
+    font-size: 30px;
+  }
+  .container .main .signup .or {
+    font-size: 1.3rem;
+  }
+  .container .main .signup .signup-form {
+    height: 55%;
+  }
+  .container .main .signup .signup-form .field label {
+    font-size: 20px;
+  }
+  .container .main .signup .signup-form .field input[type=email], .container .main .signup .signup-form .field input[type=email], .container .main .signup .signup-form .field input[type=text], .container .main .signup .signup-form .field input[type=password] {
+    font-size: 20px;
+    padding: 10px 1vh;
+  }
+  .container .main .signup .signup-form .password-confirmation {
+    margin-top: 10px;
+  }
+  .container .main .signup .signup-form .signup-button {
+    font-size: 15px;
+  }
+  .container .main-header .user-functions .function {
+    height: 90px;
+    width: 90px;
+  }
+  .container .main-header .user-functions .function i {
+    font-size: 70px;
+  }
+  .container .main-header .user-functions .notifications {
+    height: 40px;
+    width: 40px;
+  }
+  .container .main-header .user-functions .notifications p {
+    font-size: 25px;
+  }
 }
 /*# sourceMappingURL=home.css.map */

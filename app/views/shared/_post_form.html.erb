@@ -1,0 +1,21 @@
+<%= form_for(@new_post) do |f| %>
+    <%=f.text_area :content, autofocus:true, autocomplete: 'off', placeholder: "What are you going to share today?"%>
+    <div class="left">
+        <%= f.label :post_pic, class: "insert-photo" do %>
+            <i class="material-icons">insert_photo</i>
+        <%end%>
+        <%= f.file_field :post_pic ,style: "display: none;", onchange: "readURL(this);"%>
+        
+        <%=f.button  class: "create-post" do%>
+            <i class="material-icons">navigation</i>
+        <% end %>
+    </div>
+    <%= f.submit "", style: "display: none;"%>
+<% end %>
+<div id = "hidden" class = "hidden">
+    <div class="close-button" id="close">
+        <i class="material-icons">close</i>
+    </div>
+    <h1>IMAGE PREVIEW</h1>
+    <%= image_tag "", id: "blah"%>
+</div>

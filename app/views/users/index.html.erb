@@ -1,0 +1,50 @@
+<div class = "hidden" id = "change">
+        
+    <div id = "preview" class = "preview">
+        <div class="close-button" id="close-profile-pic-form">
+            <i class="material-icons">close</i>
+        </div>
+        <%= image_tag @user.profile_pic.url , id: "image"%>
+    </div>
+    <div class="buttons">
+        <%= form_for(@user, method: :put) do |f| %>
+
+            <%= f.label :profile_pic do %>
+                <i class="material-icons">insert_photo</i>
+            <% end %>
+            
+            <%= f.file_field :profile_pic, style: "display: none;", onchange: 'changePicture(this)'%>
+            
+            <%= f.button do%>
+                <i class="material-icons">navigation</i>
+            <% end %>
+            <%= f.submit "", style: "display:none;"%>
+        <% end %>
+    </div>
+        
+</div>
+<div class = "feed-container user-show">   
+    <div class = "user-info">
+        
+        <%=image_tag(@user.profile_pic.url, class:"profile-pic") %>
+        <h1><%=@user.username.capitalize%></h1>
+        <div class="change-profile-pic" id = "changeButton">
+            <i class="material-icons">insert_photo</i>
+        </div>
+    </div>
+    <main class="feed">
+        <div class = "post-form">
+            <%= render 'shared/post_form'%>
+        </div>
+        <%= render "shared/posts"%>
+    </main>
+    <aside class="friend-list">
+        <%= render "shared/friends"%>
+    </aside>
+
+</div>
+<script>
+    changeButton = document.querySelector('#changeButton').addEventListener('click', ()=>{changePicForm()});
+    closeButton = document.querySelector('#close-profile-pic-form').addEventListener('click', ()=> {hidePicForm()});
+</script>
+

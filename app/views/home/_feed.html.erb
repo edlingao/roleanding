@@ -1,49 +1,13 @@
 
-<div class = "container">
-    <%= render 'header'%>
-    <div class = "feed-container">
-        <div class = "post-form">
-            <%= form_for(@new_post) do |f| %>
-                <%=f.text_field :content, autofocus:true, autocomplete: 'off', placeholder: "What are you going to share today?"%>
-                <div class="left">
-                    <%= f.button class: "insert-photo" do%>
-                        <i class="material-icons">insert_photo</i>
-                    <% end %>
-                    
-                    <%=f.button  class: "create-post" do%>
-                        <i class="material-icons">navigation</i>
-                    <% end %>
-                </div>
-                <%= f.submit "", style: "display: none;"%>
-            <% end %>
-        </div>
-
-        <main class="feed">
-            <%@posts.each do |post|%>
-                <p><%=post.content%> <%= link_to "Delete post", post_path(post),  method: :delete%> </p><br>
-                <% if post.comments != [] %>
-                    <p>Frist comment from <%= post.content %>: <%=post.comments.first.content %><p><br>
-                    <p>Author of the comment: <%=User.find(post.comments.first.user_id).username%></p>
-                <% else %>
-                    <p>Frist comment from <%= post.content %>: <i>No comments yet<i><p><br>
-                <% end %>
-               
-            <% end %>
-        </main>
-        <aside class = "friend-list">
-            <h1>Friends</h1>
-            <%if @user.has_friends?%>
-                <%@friends.each do |friend|%>
-                    <div class="friend">
-                        <%=image_tag "https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png", class:"profile-pic"%>
-                        <p><%=friend.username%></p>
-                    </div>
-                <%end%>
-            <%else%>
-                <i>No friends yet!<i>
-            <%end%>
-        </aside>
-
+<div class = "feed-container">
+    <div class = "post-form">
+        <%= render 'shared/post_form'%>
     </div>
+    <main class="feed">
+        <%= render 'shared/posts'%>
+    </main>
+    <aside class="friend-list">
+        <%= render 'shared/friends'%>
+    </aside>
 
 </div>

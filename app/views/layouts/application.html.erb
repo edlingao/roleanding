@@ -10,12 +10,21 @@
     
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+  
+
     <%= favicon_link_tag asset_path('favicon.ico') %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <%=render 'shared/header'%>
+      <%= yield %>
+    </div>
+
   </body>
 </html>

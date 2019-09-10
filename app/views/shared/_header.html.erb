@@ -5,11 +5,11 @@
         </div>
         <% if user_signed_in? %>
             <div class="user-functions">
-                <%= render 'user_functions'%>
+                <%= render 'shared/user_functions'%>
             </div>
         <% else %>
             <div class="login">
-                <%= render 'login'%>
+                <%= render 'shared/login'%>
             </div>
         <% end %>
         

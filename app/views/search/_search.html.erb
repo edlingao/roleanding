@@ -1,0 +1,8 @@
+<%= form_tag(search_path, method: :get) do %>
+    <%=text_field_tag :search, params[:search], placeholder: "Search by Username... Or try typing 'friends' or 'blockeds'", autocomplete: 'off'%>
+    <%=button_tag :icon, name: nil do %>
+        <i class="material-icons">search</i>
+    <% end %>
+    <%submit_tag "", name:nil%>
+<% end %>
+  
