@@ -18,11 +18,11 @@
 
 function readURL(input) {
     if (input.files && input.files[0]) {
-        var reader = new FileReader();
+        let reader = new FileReader();
 
-        reader.onload = function (e) {
-            $('#blah')
-                .attr('src', e.target.result);
+        reader.onload =  (e)=> {
+            let image = document.querySelector('#blah')
+                image.src = e.target.result;
         };
 
         reader.readAsDataURL(input.files[0]);
