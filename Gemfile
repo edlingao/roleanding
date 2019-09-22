@@ -7,7 +7,7 @@ gem 'devise'
 gem 'paperclip-cloudinary'
 gem "paperclip", "~> 6.0.0"
 gem 'omniauth-facebook'
-
+gem 'rubocop'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
