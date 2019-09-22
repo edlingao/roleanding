@@ -19,7 +19,7 @@ class User < ApplicationRecord
 
   has_attached_file :profile_pic,
                       :storage => :cloudinary,
-                      :path => ':id/:style/:filename',
+                      :path => 'roleanding/users/:id/:style/:filename',
                       :cloudinary_credentials => Rails.root.join("config/cloudinary.yml")
 
     validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\z/
