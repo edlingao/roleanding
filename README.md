@@ -3,4 +3,4 @@
 This is the README for Roleanding Social Network
 
 * ERD
-    ![ERD](https://www.lucidchart.com/publicSegments/view/76924c8a-a765-44bf-82e2-f5b77e0122ca/image.png)
+    ![ERD](https://www.lucidchart.com/publicSegments/view/7a70c68f-9f12-4e03-bdbd-d69c39a9b4bb/image.png)
