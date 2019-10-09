@@ -9,10 +9,10 @@ This is the README for Roleanding Social Network
 * Ruby version
     > 2.5.6
 * Gems used
-    > gem 'devise'
-    > gem 'paperclip-cloudinary'
-    > gem "paperclip", "~> 6.0.0"
-    > gem 'omniauth-facebook'
-    > gem 'rubocop'
+    1 gem 'devise'
+    2 gem 'paperclip-cloudinary'
+    3 gem "paperclip", "~> 6.0.0"
+    4 gem 'omniauth-facebook'
+    5 gem 'rubocop'
 * Run 
-    > bundle
+    > `bundle`
