@@ -1,24 +1,6 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the README for Roleanding Social Network
 
-Things you may want to cover:
-
-* Ruby version
-    
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* ERD
+    ![ERD](https://www.lucidchart.com/publicSegments/view/7a70c68f-9f12-4e03-bdbd-d69c39a9b4bb/image.png)
