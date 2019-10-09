@@ -15,7 +15,7 @@ This is the README for Roleanding Social Network
     * `gem 'omniauth-facebook'`
     * `gem 'rubocop'`
 4. To start
-    * ## RUN > `bundle`
+    * ## RUN `bundle`
     * Go to `config > database.yml`
     * Configure the DB on `database.yml`
         *   `default: &default`
@@ -26,5 +26,5 @@ This is the README for Roleanding Social Network
         *   `# For details on connection pooling, see Rails configuration guide`
         *   `# http://guides.rubyonrails.org/configuring.html#database-pooling`
         *   `pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>`
-    * ## RUN > `rails db:create`
-    * ## RUN > `rails db:migrate`
+    * ## RUN `rails db:create`
+    * ## RUN `rails db:migrate`
