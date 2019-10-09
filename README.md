@@ -14,15 +14,15 @@ This is the README for Roleanding Social Network
     * `gem "paperclip", "~> 6.0.0"`
     * `gem 'omniauth-facebook'`
     * `gem 'rubocop'`
-4. To star  
+4. To start
     * Run > `bundle`
     * Go to `config > database.yml`
     * Configure the DB on `database.yml`
-        *   default: &default
-            adapter: postgresql
-            encoding: unicode
-            username: `[YOUR USERNAME]`
-            password: `[YOUR PASSWORD]`
-            # For details on connection pooling, see Rails configuration guide
-            # http://guides.rubyonrails.org/configuring.html#database-pooling
-            pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+        *   `default: &default`
+            `adapter: postgresql`
+            `encoding: unicode`
+            `username: [YOUR USERNAME]`
+            `password: [YOUR PASSWORD]`
+            `# For details on connection pooling, see Rails configuration guide`
+            `# http://guides.rubyonrails.org/configuring.html#database-pooling`
+            `pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>`
