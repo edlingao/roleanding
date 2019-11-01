@@ -6,12 +6,18 @@ class FriendshipsController < ApplicationController
     @friendship.status = 'waiting' unless params[:blocked]
     @friendship.status ||= 'blocked'
     @friendship.blocker = current_user.id if @friendship.status == 'blocked'
-    if @friendship.save
-      flash[:notice] = 'Succes'
-      redirect_to search_path
-    else
-      flash[:alert] = 'Something went wrong'
-      redirect_to search_path
+    respond_to do |format|
+      if @friendship.save
+        format.html{
+          flash[:notice] = 'Succes'
+          redirect_to search_path
+        }
+        format.js
+        
+      else
+        flash[:alert] = 'Something went wrong'
+        redirect_to search_path
+      end
     end
   end
 
