@@ -6,10 +6,9 @@ Rails.application.routes.draw do
   resources :friendships, only: %i[create update destroy]
   resources :posts
   resources :comments
-  
 
-  put '/like' => "likes#create"
-  delete '/like' => "likes#destroy"
+  put '/like' => 'likes#create'
+  delete '/like' => 'likes#destroy'
 
   get '/:username' => 'users#show', :constrain => { username: /[a-zA-Z-]+/ }, as: 'username'
 

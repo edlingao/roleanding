@@ -16,9 +16,9 @@ module HomeHelper
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
-  
+
   def already_liked?(post_id)
-    Like.where(user_id: current_user.id, 
-            post_id:post_id).exists?
+    Like.where(user_id: current_user.id,
+               post_id: post_id).exists?
   end
 end
