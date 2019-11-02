@@ -2,5 +2,5 @@ $("#comments_<%= @post.id%>").fadeOut(10, function(){
     
     $(this).append("<%= j render @comment%>");
     $(this).fadeIn();
-    $("#comment_content").val("").blur();
+    $("#comment_<%= @post.id %>").val("").blur();
 });
