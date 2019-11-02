@@ -6,10 +6,10 @@ class CommentsController < ApplicationController
     @post = @comment.post
     respond_to do |format|
       if @comment.save
-        format.html{
+        format.html do
           flash['alert'] = 'Success on commenting'
           redirect_to post_path(comment.post.id)
-        }
+        end
         format.js
       else
         flash['alert'] = 'Something went wrong, try again later'
