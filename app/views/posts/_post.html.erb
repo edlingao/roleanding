@@ -27,8 +27,8 @@
     
     <footer id="comments_<%= @post.id%>" class='comments'>
         <% if post.comments != [] %>
-            <%comments = post.comments.limit(3) if has_limit%>
-            <%comments ||= post.comments.limit(post.comments.count -1)%>
+            <%comments = post.comments.limit(3).order(created_at: :asc) if has_limit%>
+            <%comments ||= post.comments.limit(post.comments.count -1).order(created_at: :asc)%>
 
             <%= render comments%>
             
