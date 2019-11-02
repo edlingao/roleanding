@@ -21,7 +21,6 @@ class User < ApplicationRecord
 
   has_many :likes, dependent: :destroy
 
-
   has_attached_file :profile_pic,
                     storage: :cloudinary,
                     path: 'roleanding/users/:id/:username/:filename',
@@ -113,7 +112,7 @@ class User < ApplicationRecord
            WHERE f.status = 'friends'
            ORDER BY p.created_at DESC"
 
-    return posts = Post.find_by_sql(sql)
+    posts = Post.find_by_sql(sql)
   end
 
   # Returns our friend user_id and user name, also returns a friendship_id and the status Only where the status is 'friends'
@@ -122,7 +121,7 @@ class User < ApplicationRecord
            FROM users u
            JOIN friendships f ON (f.user_id = #{id} AND f.friend_id = u.id) OR (f.friend_id = #{id} AND f.user_id = u.id)
            WHERE u.id != #{id} AND f.status = 'friends'"
-    return friends = User.find_by_sql(sql)
+    friends = User.find_by_sql(sql)
   end
 
   # Returns true if the user has at least one friendship with status = 'friends'
@@ -137,7 +136,7 @@ class User < ApplicationRecord
     sql = "SELECT u.id, u.username, f.id AS friendship_id, f.status
            FROM users u JOIN friendships f ON (f.user_id = #{id} AND f.friend_id = u.id) OR (f.friend_id = #{id} AND f.user_id = u.id)
            WHERE u.id != #{id} AND f.status = 'blocked' AND f.blocker != #{id}"
-    return blocked = User.find_by_sql(sql)
+    blocked = User.find_by_sql(sql)
   end
 
   # returns every user that
@@ -145,7 +144,7 @@ class User < ApplicationRecord
     sql = "SELECT u.id, u.username, u.profile_pic_file_name, f.id AS friendship_id, f.status
            FROM users u JOIN friendships f ON (f.user_id = #{id} AND f.friend_id = u.id) OR (f.friend_id = #{id} AND f.user_id = u.id)
            WHERE u.id != #{id} AND f.status = 'blocked' AND f.blocker = #{id}"
-    return blocked = User.find_by_sql(sql)
+    blocked = User.find_by_sql(sql)
   end
 
   # returns the inverse_friendships with status = "waiting"

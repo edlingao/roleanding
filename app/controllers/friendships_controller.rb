@@ -8,12 +8,12 @@ class FriendshipsController < ApplicationController
     @friendship.blocker = current_user.id if @friendship.status == 'blocked'
     respond_to do |format|
       if @friendship.save
-        format.html{
+        format.html do
           flash[:notice] = 'Succes'
           redirect_to search_path
-        }
+        end
         format.js
-        
+
       else
         flash[:alert] = 'Something went wrong'
         redirect_to search_path
