@@ -25,22 +25,12 @@
         </div>
     </main>
     
-    <footer class='comments'>
+    <footer id="comments_<%= @post.id%>" class='comments'>
         <% if post.comments != [] %>
-            <%comments = post.comments.limit(3)%>
-            
-            <% comments.each do |comment| %>
-                <%comment_author = comment.user%>
-                <div class="comment">
-                    <div class='comment-author'>
-                        <%=link_to image_tag(comment_author.profile_pic.url, class:"profile-pic"), username_path(comment_author.username) %>
-                        <h3><%= comment_author.username%></h3>
-                    </div>
-                    <div class="comment-content">
-                        <%=simple_format comment.content%>
-                    </div>
-                </div>
-            <% end %>
+            <%comments = post.comments.limit(3) if has_limit%>
+            <%comments ||= post.comments.limit(post.comments.count -1)%>
+
+            <%= render comments%>
             
         <% else %>
             <i>No comments yet</i><p><br>
@@ -55,7 +45,7 @@
                 <%=image_tag @user.profile_pic.url%>
                 <p><%=@user.username%></p>
             </div>
-            <%= form_for(new_comment) do |f| %>
+            <%= form_for(new_comment, remote: true) do |f| %>
                     <%= f.text_field :post_id, autocomplete: "off", value: post.id, hidden:true%>
                     <%=f.text_area :content, placeholder: "Leave your opinion", autocomplete: "off"%>
                     <%= f.submit "", style: "display: none;"%>

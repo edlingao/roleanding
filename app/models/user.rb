@@ -24,7 +24,7 @@ class User < ApplicationRecord
 
   has_attached_file :profile_pic,
                     storage: :cloudinary,
-                    path: 'roleanding/users/:id/:username/:style/:filename',
+                    path: 'roleanding/users/:id/:username/:filename',
                     cloudinary_credentials: Rails.root.join('config/cloudinary.yml')
 
   validates_attachment_content_type :profile_pic, content_type: %r{\Aimage/.*\z}
