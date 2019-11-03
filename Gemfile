@@ -9,6 +9,7 @@ gem "paperclip", "~> 6.0.0"
 gem 'omniauth-facebook'
 gem 'rubocop'
 gem 'rspec'
+gem 'jquery'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
