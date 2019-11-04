@@ -1,4 +1,4 @@
-<%= link_to(like_path(post_id: @post, like_id: @post.likes.find_by(user_id: current_user.id).id), id: "dislike_#{@post.likes.find_by(user_id: current_user.id).id}", method: :delete, data: {remote: true}, class: "dislike") do%>
+<%= link_to(like_path(post_id: @post, like_id: @like.id), id: "dislike_#{@like.id}", method: :delete, data: {remote: true}, class: "dislike") do%>
     <i class="material-icons">favorite</i>
 <%end%>
 
