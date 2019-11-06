@@ -1,8 +1,8 @@
 FactoryBot.define do
     factory :user do
-      email { 'test@example.com' }
-      username {'examplesupertest'}
-      password { 'f4k3p455w0rd' }
+      email { 'test@ex.com' }
+      username {'ex'}
+      password { 'marvel99' }
       # using dynamic attributes over static attributes in FactoryBot
   
       # if needed

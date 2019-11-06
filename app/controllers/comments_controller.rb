@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
       if @comment.save
         format.html do
           flash['alert'] = 'Success on commenting'
-          redirect_to post_path(comment.post.id)
+          redirect_to post_path(@post.id)
         end
         format.js
       else

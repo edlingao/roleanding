@@ -4,25 +4,30 @@ class LikesController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @like = @post.likes.new user_id: current_user.id
-
-    if !already_liked?(@post.id)
-      if @like.save
-        flash['alert'] = 'Liked!'
-
-        respond_to do |format|
+    respond_to do |format|
+      if !already_liked?(@post.id)
+        if @like.save
+          format.html{
+            flash['alert'] = 'Liked!'
+            redirect_to post_path(@post.id)
+          }
+          format.js
+        else
+          format.html{
+            falsh['alert'] = 'Cant like twice'
+            redirect_to root_path
+          }
           format.js
         end
-      else
-        falsh['alert'] = 'Cant like twice'
-        redirect_to root_path
-      end
 
-    else
-      flash['alert'] = 'Already liked!'
-      redirect_to post_path(@post.id)
-    end
-    respond_to do |format|
-      format.js
+      else
+        format.html{
+          flash['alert'] = 'Already liked!'
+          redirect_to post_path(@post.id)
+        }
+        format.js
+      end
+      
     end
   end
 

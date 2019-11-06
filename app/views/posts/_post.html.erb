@@ -49,9 +49,9 @@
             </div>
             <%= form_for(new_comment, remote: true) do |f| %>
                     <%= f.text_field :post_id, autocomplete: "off", value: post.id, hidden:true%>
-                    <%=f.text_area :content, placeholder: "Leave your opinion", autocomplete: "off", id: "comment_#{post.id}"%>
+                    <%=f.text_area :content, placeholder: "Leave your opinion", autocomplete: "off", id: "comment_#{post.id}", class: "new_comment"%>
                     <%= f.submit "", style: "display: none;"%>
-                    <%=f.button do%>
+                    <%=f.button id:"submit_comment" do%>
                         <i class="material-icons">navigation</i>
                     <% end %>
             <% end %>
