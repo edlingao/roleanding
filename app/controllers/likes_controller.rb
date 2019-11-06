@@ -8,7 +8,7 @@ class LikesController < ApplicationController
       if !already_liked?(@post.id)
         if @like.save
           format.html do
-            flash['alert'] = 'Liked!'; 
+            flash['alert'] = 'Liked!'
             redirect_to post_path(@post.id)
           end
         end
