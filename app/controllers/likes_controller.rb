@@ -7,27 +7,26 @@ class LikesController < ApplicationController
     respond_to do |format|
       if !already_liked?(@post.id)
         if @like.save
-          format.html{
+          format.html do
             flash['alert'] = 'Liked!'
             redirect_to post_path(@post.id)
-          }
+          end
           format.js
         else
-          format.html{
+          format.html do
             falsh['alert'] = 'Cant like twice'
             redirect_to root_path
-          }
+          end
           format.js
         end
 
       else
-        format.html{
+        format.html do
           flash['alert'] = 'Already liked!'
           redirect_to post_path(@post.id)
-        }
+        end
         format.js
       end
-      
     end
   end
 
