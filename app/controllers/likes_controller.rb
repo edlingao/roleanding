@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-
 class LikesController < ApplicationController
+  
   def create
     @post = Post.find(params[:post_id])
     @like = @post.likes.new user_id: current_user.id
@@ -11,22 +11,19 @@ class LikesController < ApplicationController
             flash['alert'] = 'Liked!'
             redirect_to post_path(@post.id)
           end
-          format.js
         else
           format.html do
             falsh['alert'] = 'Cant like twice'
             redirect_to root_path
           end
-          format.js
         end
-
       else
         format.html do
           flash['alert'] = 'Already liked!'
           redirect_to post_path(@post.id)
         end
-        format.js
       end
+      format.js
     end
   end
 
