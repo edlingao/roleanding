@@ -1,8 +1,10 @@
 
-<%author = post.user%>
+<%from_js ||= false%>
+<%author = post.user unless from_js %>
+<%author ||= current_user%>
 <%@post = post%>
 <%@like = @post.likes.find_by(user_id: current_user.id)%>
-<div class="post">
+<div class="post" id = "post_id_<%= @post.id %>">
     <header class = 'post-header'>
         <div class='author'>
             <h1><%=author.username.capitalize%> <brown>posted</brown></h1>

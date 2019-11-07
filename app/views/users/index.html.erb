@@ -34,9 +34,9 @@
     </div>
     <main class="feed">
         <div class = "post-form">
-            <%= render 'shared/post_form'%>
+            <%= render 'shared/post_form', personal_profile: true%>
         </div>
-        <%= render @posts, has_limit: true%>
+        <%= render @posts, has_limit: true, from_js: false%>
     </main>
     <aside class="friend-list">
         <%= render "shared/friends"%>

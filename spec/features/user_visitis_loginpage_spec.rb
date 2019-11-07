@@ -17,7 +17,7 @@ describe 'user visits home page', type: :feature do
     user = FactoryBot.create(:user)
     login_as(user)
     visit root_path
-    fill_in 'new_post', with: 'test numero #1'
+    fill_in 'new_post_text_area', with: 'test numero #1'
     click_on 'send_new_post'
     visit visit current_path
 
@@ -27,7 +27,7 @@ describe 'user visits home page', type: :feature do
     user = FactoryBot.create(:user)
     login_as(user)
     visit root_path
-    fill_in 'new_post', with: 'test numero #1'
+    fill_in 'new_post_text_area', with: 'test numero #1'
     click_on 'send_new_post'
     visit current_path
 
@@ -41,7 +41,7 @@ describe 'user visits home page', type: :feature do
     user = FactoryBot.create(:user)
     login_as(user)
     visit root_path
-    fill_in 'new_post', with: 'test numero #1'
+    fill_in 'new_post_text_area', with: 'test numero #1'
     click_on 'send_new_post'
     visit current_path
 
