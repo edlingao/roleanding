@@ -1,0 +1,10 @@
+$('#like_<%= @post.id%>').fadeOut(200, function(){
+
+    $("#like-counter_<%= @post.id%>").remove();
+    $('#post-link_<%= @post.id%>').remove();
+    $("#post_likes_<%= @post.id %>").prepend("<%= j render partial: 'shared/dislike', post: @post%>")
+    
+
+    $(this).remove();
+});
+

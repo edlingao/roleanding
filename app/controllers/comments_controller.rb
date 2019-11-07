@@ -2,13 +2,19 @@
 
 class CommentsController < ApplicationController
   def create
-    comment = current_user.comments.build comment_params
-    if comment.save
-      flash['alert'] = 'Success on commenting'
-      redirect_to post_path(comment.post.id)
-    else
-      flash['alert'] = 'Something went wrong, try again later'
-      redirect_to root_path
+    @comment = current_user.comments.build comment_params
+    @post = @comment.post
+    respond_to do |format|
+      if @comment.save
+        format.html do
+          flash['alert'] = 'Success on commenting'
+          redirect_to post_path(@post.id)
+        end
+        format.js
+      else
+        flash['alert'] = 'Something went wrong, try again later'
+        redirect_to root_path
+      end
     end
   end
 

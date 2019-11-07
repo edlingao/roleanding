@@ -1,12 +1,12 @@
-<%= form_for(@new_post) do |f| %>
-    <%=f.text_area :content, autofocus:true, autocomplete: 'off', placeholder: "What are you going to share today?"%>
+<%= form_for(@new_post, remote: personal_profile) do |f| %>
+    <%=f.text_area :content, id: "new_post_text_area", autofocus:true, autocomplete: 'off', placeholder: "What are you going to share today?"%>
     <div class="left">
         <%= f.label :post_pic, class: "insert-photo" do %>
             <i class="material-icons">insert_photo</i>
         <%end%>
         <%= f.file_field :post_pic ,style: "display: none;", onchange: "readURL(this);"%>
         
-        <%=f.button  class: "create-post" do%>
+        <%=f.button  id: "send_new_post",class: "create-post" do%>
             <i class="material-icons">navigation</i>
         <% end %>
     </div>

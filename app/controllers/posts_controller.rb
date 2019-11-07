@@ -10,15 +10,21 @@ class PostsController < ApplicationController
   end
 
   def create
-    user = current_user
-    post = user.posts.new post_params
-
-    if post.save
-      flash[:alert] = 'post succesfully created'
-      redirect_to post_path(post.id)
-    else
-      flash[:alert] = 'Something went wrong on creating your post'
-      redirect_to root_path
+    @user = current_user
+    @post = @user.posts.new post_params
+    respond_to do |format|
+      if @post.save
+        format.html do
+          flash[:alert] = 'post succesfully created'
+          redirect_to post_path(@post.id)
+        end
+      else
+        format.html do
+          flash[:alert] = 'Something went wrong on creating your post'
+          redirect_to root_path
+        end
+      end
+      format.js
     end
   end
 

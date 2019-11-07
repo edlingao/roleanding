@@ -10,6 +10,7 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
@@ -69,6 +70,39 @@ function hidePicForm(){
     let picForm = document.querySelector('#change');
     picForm.className = "hidden change-pic-form back-anim";
     
+}
+
+
+
+function AddLike(like){
+    
+    likes = 0;
+}
+
+function SubstractLike(dislike){
+    console.log(dislike);
+}
+
+function addLikeEventListener(){
+    let likesButtons = document.querySelectorAll("[id='like']");
+    let dislikeButtons = document.querySelectorAll("[id='dislike']");
+
+    likesButtons.forEach(like => {
+        like.addEventListener('click', ()=>{
+            let div = like.parentElement;
+            let counter = div.querySelector("#like-counter");
+            let likes = parseInt(counter.innerHTML);
+            let icon = like.
+            likes += 1;
+            counter.innerHTML = likes;
+
+            console.log(counter);
+        });
+    });
+
+    dislikeButtons.forEach(dislike => {
+        dislike.addEventListener('click', SubstractLike(dislike));
+    });
 }
 
 let changeButton;

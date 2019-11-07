@@ -330,6 +330,48 @@ body{
                             margin-bottom: 40px
                         }
                     }
+                    .likes{
+                        
+                        display: grid;
+                        grid-template-columns: 40px 400px;
+                        grid-template-rows: 40px;
+                        grid-template-areas: "like link"
+                                             "like-counter like-counter";
+                        height: 111px;
+                        .like, .dislike{
+                            grid-area: like;
+                            justify-self: center;
+                            
+                            i{
+                                color: $deep-blue;
+                                font-size: 32px;
+                            }
+                            a{
+                                height: 32px;
+                            }
+                        }
+                        .dislike{
+                            i{
+                                color: $red;
+                            }
+                        }
+                        
+                        .post-link{
+                            grid-area: link;
+                            i{
+                                color: $deep-blue;
+                                font-size: 32px;
+                            }
+                        }
+
+                        .likes-number{
+                            grid-area: like-counter;
+                            text-align: start;
+                            font-size: 15px;
+                            
+                        }
+
+                    }
 
                 }
                 .comments{
