@@ -3,7 +3,7 @@
 <%author = post.user unless from_js %>
 <%author ||= current_user%>
 <%@post = post%>
-<%@like = @post.likes.find_by(user_id: current_user.id)%>
+<%@like = @post.likes.find_by(user_id: current_user.id) unless current_user.nil?%>
 <div class="post" id = "post_id_<%= @post.id %>">
     <header class = 'post-header'>
         <div class='author'>
@@ -18,13 +18,15 @@
             <%=simple_format(post.content.truncate(900))%>
         </div>
         <div id = "post_likes_<%= @post.id%>" class = "likes" >
-            
-            <%if already_liked?(post.id)%>
-                <%= render partial: "shared/dislike", user: @user, post: @post, like: @like %>
+            <%if @user != "PUBLIC"%>
+                <%if already_liked?(post.id)%>
+                    <%= render partial: "shared/dislike", user: @user, post: @post, like: @like %>
+                <%else%>
+                    <%= render partial: "shared/like", post: @post %>
+                <%end%>
             <%else%>
-                <%= render partial: "shared/like", post: @post %>
+                <%= render  partial: 'shared/public_likes', post: @post %>
             <%end%>
-            
             
         </div>
     </main>
@@ -41,22 +43,24 @@
         <% end %>
         
     </footer>
-    <div class="comment-form-container">
-    
-        <div class="new-comment-form">
-            <%new_comment = post.comments.new%>
-            <div class="comment-user">
-                <%=image_tag @user.profile_pic.url%>
-                <p><%=@user.username%></p>
+    <%if @user != "PUBLIC"%>
+        <div class="comment-form-container">
+        
+            <div class="new-comment-form">
+                <%new_comment = post.comments.new%>
+                <div class="comment-user">
+                    <%=image_tag @user.profile_pic.url%>
+                    <p><%=@user.username%></p>
+                </div>
+                <%= form_for(new_comment, remote: true) do |f| %>
+                        <%= f.text_field :post_id, autocomplete: "off", value: post.id, hidden:true%>
+                        <%=f.text_area :content, placeholder: "Leave your opinion", autocomplete: "off", id: "comment_#{post.id}", class: "new_comment"%>
+                        <%= f.submit "", style: "display: none;"%>
+                        <%=f.button id:"submit_comment" do%>
+                            <i class="material-icons">navigation</i>
+                        <% end %>
+                <% end %>
             </div>
-            <%= form_for(new_comment, remote: true) do |f| %>
-                    <%= f.text_field :post_id, autocomplete: "off", value: post.id, hidden:true%>
-                    <%=f.text_area :content, placeholder: "Leave your opinion", autocomplete: "off", id: "comment_#{post.id}", class: "new_comment"%>
-                    <%= f.submit "", style: "display: none;"%>
-                    <%=f.button id:"submit_comment" do%>
-                        <i class="material-icons">navigation</i>
-                    <% end %>
-            <% end %>
         </div>
-    </div>
+    <%end%>
 </div>

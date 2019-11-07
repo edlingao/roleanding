@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   def show
     @post = find_post
     @user = current_user
+    @user ||= "PUBLIC"
     @author = @post.user
     @comments = @post.comments
     @new_comment = @post.comments.new

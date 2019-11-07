@@ -7,7 +7,7 @@
         
     </div>
     <main class="feed">
-        <%= render @posts, has_limit: true%>
+        <%= render @posts, has_limit: true, from_js: false%>
     </main>
     <aside class="friend-list">
         <%= render "shared/friends"%>
