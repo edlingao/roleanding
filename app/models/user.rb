@@ -192,7 +192,13 @@ class User < ApplicationRecord
   def reloaded_with_not_existing(username)
     sql = "SELECT u.id, u.username, u.profile_pic_file_name
            FROM users u
-           WHERE u.id != #{id} AND u.username = '#{username}' AND NOT EXISTS(SELECT friendships.id FROM friendships WHERE (friendships.user_id = #{id} AND friendships.friend_id = u.id) OR (friendships.friend_id = #{id} AND friendships.user_id = u.id))"
+           WHERE u.id != #{id} AND u.username = '#{username}' 
+           AND NOT EXISTS(SELECT friendships.id FROM friendships 
+                          WHERE (friendships.user_id = #{id} 
+                            AND friendships.friend_id = u.id) 
+            OR (friendships.friend_id = #{id} 
+            AND friendships.user_id = u.id))"
+
     unexisting_friendships = User.find_by_sql(sql)
     unexisting_friendships
   end

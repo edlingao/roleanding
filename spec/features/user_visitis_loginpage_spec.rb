@@ -49,7 +49,7 @@ describe 'user visits home page', type: :feature do
     expect(page).to have_css 'p', text: 'first comment'
   end
   it 'and sends a friend request' do
-    friend = FactoryBot.create(:friend)
+    FactoryBot.create(:friend)
     visit search_path
     click_link class: 'add-person'
     visit current_path
