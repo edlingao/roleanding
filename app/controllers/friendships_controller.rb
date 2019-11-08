@@ -20,7 +20,7 @@ class FriendshipsController < ApplicationController
           flash[:alert] = 'Something went wrong'
           redirect_to search_path
         end
-        
+
       end
     end
   end
@@ -29,7 +29,7 @@ class FriendshipsController < ApplicationController
   def update
     @friendship = find_friendship
     @user = @friendship.friend if @friendship.friend != current_user
-    @user ||= @friendship.user 
+    @user ||= @friendship.user
 
     @friendship.status = params[:status]
     # Checks if the current user has blocked a friend
@@ -42,7 +42,7 @@ class FriendshipsController < ApplicationController
           redirect_to search_path if params[:from] == 'search'
           redirect_to notifications_path unless params[:from]
         end
-        
+
       else
         format.html do
           flash[:alert] = 'Unable to add friend.'
@@ -67,7 +67,6 @@ class FriendshipsController < ApplicationController
         redirect_to search_path
       end
       format.js
-
     end
   end
 

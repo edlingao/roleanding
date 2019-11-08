@@ -167,9 +167,8 @@ class User < ApplicationRecord
     pending = User.find_by_sql(sql)
     pending
   end
-  
+
   def reloaded_with_existing(username)
-    
     sql = "SELECT u.id, u.username,u.profile_pic_file_name, f.id AS friendship_id, f.status
            FROM users u JOIN friendships f ON (f.user_id = #{id} AND f.friend_id = u.id) OR (f.friend_id = #{id} AND f.user_id = u.id)
            WHERE u.id != #{id} AND u.username = '#{username}' AND EXISTS(SELECT friendships.id FROM friendships WHERE (friendships.user_id = #{id} AND friendships.friend_id = u.id) OR (friendships.friend_id = #{id} AND friendships.user_id = u.id))
@@ -183,12 +182,10 @@ class User < ApplicationRecord
   end
 
   def reloaded_with_not_existing(username)
-    
     sql = "SELECT u.id, u.username, u.profile_pic_file_name
            FROM users u
            WHERE u.id != #{id} AND u.username = '#{username}' AND NOT EXISTS(SELECT friendships.id FROM friendships WHERE (friendships.user_id = #{id} AND friendships.friend_id = u.id) OR (friendships.friend_id = #{id} AND friendships.user_id = u.id))"
     unexisting_friendships = User.find_by_sql(sql)
     unexisting_friendships
   end
-
 end
