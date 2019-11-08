@@ -3,12 +3,9 @@
 require 'rails_helper'
 
 describe 'user visits home page', type: :feature do
-
   before(:each) do |test|
-
-    @user = FactoryBot.create(:user) 
+    @user = FactoryBot.create(:user)
     login_as(@user) unless test.metadata[:logged_out]
-
   end
   it ', succesfully', :logged_out do
     visit root_path
@@ -20,7 +17,6 @@ describe 'user visits home page', type: :feature do
     expect(page).to have_css 'div', class: 'post-form'
   end
   it 'and post something' do
-  
     visit root_path
     fill_in 'new_post_text_area', with: 'test numero #1'
     click_on 'send_new_post'
@@ -29,7 +25,6 @@ describe 'user visits home page', type: :feature do
     expect(page).to have_css 'p', text: 'test numero #1'
   end
   it 'and likes a post', format: :js do
-    
     visit root_path
     fill_in 'new_post_text_area', with: 'test numero #1'
     click_on 'send_new_post'
@@ -42,7 +37,6 @@ describe 'user visits home page', type: :feature do
   end
 
   it 'and comments a post' do
-    
     visit root_path
     fill_in 'new_post_text_area', with: 'test numero #1'
     click_on 'send_new_post'
@@ -54,7 +48,7 @@ describe 'user visits home page', type: :feature do
 
     expect(page).to have_css 'p', text: 'first comment'
   end
-  it "and sends a friend request" do
+  it 'and sends a friend request' do
     friend = FactoryBot.create(:friend)
     visit search_path
     click_link class: 'add-person'
@@ -62,7 +56,7 @@ describe 'user visits home page', type: :feature do
 
     expect(page).to have_css 'a', class: 'waiting'
   end
-  it "and accepts friend requests" do
+  it 'and accepts friend requests' do
     friend = FactoryBot.create(:friend)
     visit search_path
     click_link class: 'add-person'
