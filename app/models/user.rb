@@ -169,7 +169,6 @@ class User < ApplicationRecord
   end
 
   def reloaded_with_existing(username)
-    
     sql = "
            SELECT u.id, u.username,u.profile_pic_file_name, f.id AS friendship_id, f.status
            FROM users u JOIN friendships f ON (f.user_id = #{id} AND f.friend_id = u.id) OR (f.friend_id = #{id} AND f.user_id = u.id)
