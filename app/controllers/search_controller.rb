@@ -19,7 +19,7 @@ class SearchController < ApplicationController
 
   private
 
-  def searhc_params
+  def search_params
     param.require(:search).permit(:search)
   end
 end

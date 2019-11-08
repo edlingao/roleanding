@@ -1,0 +1,41 @@
+<div class="person" id = "user_<%=user.id%>">
+    <div class="person-links">
+        <%=link_to image_tag(user.profile_pic.url), username_path(user.username)%>
+        <h1><%= user.username.capitalize%></h1>
+    </div>
+    <div class="friend-links">
+        
+        <% if user.try(:status)%>
+            <% if user.status == 'blocked' %>
+                <%= link_to friendship_path(friend: user, id: user.friendship_id), method: :delete, remote: true, class: "unblock" do %>
+                    <i class="material-icons">cancel</i>
+                <% end %>
+            <% else %>
+                <%= link_to friendship_path(id: user.friendship_id, status: "blocked", from: "search"), data: {confirm: "Do you want to block #{user.username.capitalize}?"}, method: :put, remote: true,class: "blocked" do %>
+                    <i class="material-icons">block</i>
+                <% end %>
+            <% end %>
+            
+            <%case user.status%>
+                <%when "friends"%>
+                    <%= link_to friendship_path(friend: user, id: user.friendship_id), method: :delete, remote: true,data: {confirm: "Cancel friendship with #{user.username.capitalize}?"}, class: "delete-person" do %>
+                        <i class="material-icons">person_add_disabled</i>
+                    <% end %>
+                <%when "waiting"%>
+                    <%= link_to friendship_path(friend: user, id: user.friendship_id), method: :delete, remote: true, data: {confirm: "Cancel friendship request?"}, class: "waiting" do %>
+                        <i class="material-icons">access_time</i>
+                    <% end %>
+            <% end %>
+            
+        <% else %>
+            <%= link_to friendships_path(friend_id: user, blocked: 'yes'), method: :post, remote: true,data: {confirm: "Do you want to block #{user.username.capitalize}?"}, class: "blocked" do %>
+                <i class="material-icons">block</i>
+            <% end %>
+            <%= link_to friendships_path(friend_id: user), method: :post, remote: true,class: "add-person" do %>
+                <i class="material-icons">person_add</i>
+            <% end %>
+        <% end %>
+        
+        
+    </div>
+</div>

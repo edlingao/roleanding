@@ -8,7 +8,7 @@
             </div>
             <div class="accept-links">
 
-                <%= link_to friendship_path(id: person.friendship_id, status: "friends"), method: :put do %>
+                <%= link_to friendship_path(id: person.friendship_id, status: "friends"), method: :put , class:'accept-friendship' do %>
                     <i class="material-icons">check</i>
                 <% end %>
 

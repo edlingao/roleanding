@@ -1,0 +1,5 @@
+<%@us = current_user.reloaded_with_existing(@user.username)%>
+$("#user_<%=@user.id%>").fadeOut(500,function(){
+    $(this).remove();
+    $(".person:last-child").after("<%= j render @us%>");
+});

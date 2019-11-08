@@ -154,8 +154,41 @@ class User < ApplicationRecord
     sql = "SELECT u.id, u.username,u.profile_pic_file_name, f.id AS friendship_id, f.status
            FROM users u
            JOIN friendships f ON (f.friend_id = #{id} AND f.user_id = u.id)
-           WHERE u.id != #{id} AND f.status = 'waiting'"
+           WHERE u.id != #{id} AND f.status = 'waiting' "
     pending = User.find_by_sql(sql)
     pending
   end
+
+  def reloaded(friend_id)
+    sql = "SELECT u.id, u.username,u.profile_pic_file_name, f.id AS friendship_id, f.status
+           FROM users u
+           JOIN friendships f ON (f.friend_id = u.id AND f.user_id = #{id})
+           WHERE u.id != #{id} AND (f.status = 'waiting' OR f.status = 'blocked')  AND f.friend_id = #{friend_id}"
+    pending = User.find_by_sql(sql)
+    pending
+  end
+  
+  def reloaded_with_existing(username)
+    
+    sql = "SELECT u.id, u.username,u.profile_pic_file_name, f.id AS friendship_id, f.status
+           FROM users u JOIN friendships f ON (f.user_id = #{id} AND f.friend_id = u.id) OR (f.friend_id = #{id} AND f.user_id = u.id)
+           WHERE u.id != #{id} AND u.username = '#{username}' AND EXISTS(SELECT friendships.id FROM friendships WHERE (friendships.user_id = #{id} AND friendships.friend_id = u.id) OR (friendships.friend_id = #{id} AND friendships.user_id = u.id))
+           AND CASE
+           WHEN f.status = 'blocked' AND f.blocker != #{id}
+           THEN false
+           ELSE true
+           END"
+    existing_friendships = User.find_by_sql(sql)
+    existing_friendships
+  end
+
+  def reloaded_with_not_existing(username)
+    
+    sql = "SELECT u.id, u.username, u.profile_pic_file_name
+           FROM users u
+           WHERE u.id != #{id} AND u.username = '#{username}' AND NOT EXISTS(SELECT friendships.id FROM friendships WHERE (friendships.user_id = #{id} AND friendships.friend_id = u.id) OR (friendships.friend_id = #{id} AND friendships.user_id = u.id))"
+    unexisting_friendships = User.find_by_sql(sql)
+    unexisting_friendships
+  end
+
 end
