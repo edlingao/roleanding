@@ -19,7 +19,7 @@ RSpec.describe User, type: :model do
 
     expect(@user.has_friends?).to eql(true)
   end
-  it 'checks if two users are friends' do 
+  it 'checks if two users are friends' do
     expect(@user.are_we_friends?(@friend.id)).to eql(true)
   end
   it 'checks if the user blocked another user' do
@@ -32,10 +32,9 @@ RSpec.describe User, type: :model do
     expect(@user.all_users[0]).to eql(@friend)
   end
   it 'returns all the users with status: friends' do
-    
     expect(@user.all_users(true)[0]).to eql(@friend)
   end
-  it "must delete a friendship" do
+  it 'must delete a friendship' do
     @friendship.destroy
     expect(@user.has_friends?).to eql(false)
   end
