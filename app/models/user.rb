@@ -112,6 +112,7 @@ class User < ApplicationRecord
   end
 
   # Returns our friend user_id and user name, also returns a friendship_id and the status Only where the status is 'friends'
+  # Buggy, use all_users(true) untill it gets fixed
   def all_friends
     sql = "SELECT u.id, u.username,u.profile_pic_file_name, f.id AS friendship_id, f.status
            FROM users u
@@ -122,7 +123,7 @@ class User < ApplicationRecord
 
   # Returns true if the user has at least one friendship with status = 'friends'
   def has_friends?
-    recived_sended = all_friends
+    recived_sended = all_users true
     return false if recived_sended == []
 
     true
