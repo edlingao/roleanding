@@ -72,7 +72,20 @@ class User < ApplicationRecord
            ELSE true
            END
            "
-    existing_friendships = User.find_by_sql(sql)
+    existing_friendships = User.find_by_sql(sql) unless friends_only
+    sql = "SELECT u.id, u.username, u.profile_pic_file_name, f.id AS friendship_id, f.status
+           FROM users u JOIN friendships f ON (f.user_id = #{id} AND f.friend_id = u.id) OR (f.friend_id = #{id} AND f.user_id = u.id)
+           WHERE u.id != #{id} AND EXISTS(SELECT friendships.id FROM friendships WHERE (friendships.user_id = #{id} AND friendships.friend_id = u.id) OR (friendships.friend_id = #{id} AND friendships.user_id = u.id))
+           AND CASE
+           WHEN f.status = 'blocked' AND f.blocker != #{id}
+           THEN false
+           WHEN f.status = 'friends'
+           THEN true
+           ELSE false
+           END
+           "
+    existing_friendships ||= User.find_by_sql(sql)
+
     all_users << unexisting_friendships unless friends_only
     all_users << existing_friendships
     all_users.flatten!
