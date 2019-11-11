@@ -46,14 +46,10 @@ class User < ApplicationRecord
   end
 
   def are_we_friends?(other_user_id)
-    sql = "SELECT u.id, u.username,u.profile_pic_file_name, f.id AS friendship_id, f.status
-           FROM users u
-           JOIN friendships f ON (f.user_id = #{id} AND f.friend_id = #{other_user_id}) OR (f.friend_id = #{id} AND f.user_id = #{other_user_id})
-           WHERE u.id != #{id} AND f.status = 'friends'"
-    friends = User.find_by_sql(sql)
-    return true if friends != [] || other_user_id == id
-
-    false
+    
+    are_we = self.friendships.where(friend_id: other_user_id).exists?
+    are_we =self.inverse_friendships.where(user_id: other_user_id).exists? unless are_we
+    are_we
   end
 
   def blocked?(other_user_id)
@@ -62,23 +58,23 @@ class User < ApplicationRecord
     (blocked = blocked) || block_by
   end
 
-  def all_users
+  def all_users(friends_only = false)
     all_users = []
     sql = "SELECT u.id, u.username, u.profile_pic_file_name
            FROM users u
-           WHERE u.id != #{id} AND NOT EXISTS(SELECT friendships.id FROM friendships WHERE (friendships.user_id = #{id} AND friendships.friend_id = u.id) OR (friendships.friend_id = #{id} AND friendships.user_id = u.id))"
-    unexisting_friendships = User.find_by_sql(sql)
+           WHERE u.id != #{id} AND NOT EXISTS(SELECT friendships.id FROM friendships WHERE (friendships.user_id = #{self.id} AND friendships.friend_id = u.id) OR (friendships.friend_id = #{self.id} AND friendships.user_id = u.id))"
+    unexisting_friendships = User.find_by_sql(sql) unless friends_only
     sql = "SELECT u.id, u.username, u.profile_pic_file_name, f.id AS friendship_id, f.status
-           FROM users u JOIN friendships f ON (f.user_id = #{id} AND f.friend_id = u.id) OR (f.friend_id = #{id} AND f.user_id = u.id)
-           WHERE u.id != #{id} AND EXISTS(SELECT friendships.id FROM friendships WHERE (friendships.user_id = #{id} AND friendships.friend_id = u.id) OR (friendships.friend_id = #{id} AND friendships.user_id = u.id))
+           FROM users u JOIN friendships f ON (f.user_id = #{self.id} AND f.friend_id = u.id) OR (f.friend_id = #{self.id} AND f.user_id = u.id)
+           WHERE u.id != #{self.id} AND EXISTS(SELECT friendships.id FROM friendships WHERE (friendships.user_id = #{self.id} AND friendships.friend_id = u.id) OR (friendships.friend_id = #{self.id} AND friendships.user_id = u.id))
            AND CASE
-           WHEN f.status = 'blocked' AND f.blocker != #{id}
+           WHEN f.status = 'blocked' AND f.blocker != #{self.id}
            THEN false
            ELSE true
            END
            "
     existing_friendships = User.find_by_sql(sql)
-    all_users << unexisting_friendships
+    all_users << unexisting_friendships unless friends_only
     all_users << existing_friendships
     all_users.flatten!
   end
