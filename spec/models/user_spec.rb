@@ -7,17 +7,15 @@ RSpec.describe User, type: :model do
     @user = FactoryBot.create(:user)
     @friend = FactoryBot.create(:friend)
     @friendship = @user.friendships.new friend_id: @friend.id
-    @friendship.status = 'waiting'
+    @friendship.status = 'friends'
     @friendship.save
   end
   it 'must have one friend' do
+    @friendship.status = 'waiting'
+    @friendship.save
     expect(@friend.pending[0].id).to eql(@user.id)
-  end
-  it 'must accept a friendship' do
     @friendship.status = 'friends'
     @friendship.save
-
-    expect(@user.has_friends?).to eql(true)
   end
   it 'checks if two users are friends' do
     expect(@user.are_we_friends?(@friend.id)).to eql(true)
