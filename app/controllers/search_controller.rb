@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
 class SearchController < ApplicationController
+  before_action :authenticate_user!
   def index
     @user = current_user
-    @people = if params[:search]
-                @user.search(params[:search].downcase)
-              else
-                @user.all_users
-              end
+    @people = params[:search] ? @user.search(params[:search].downcase) : @user.all_users
+
     @people = @user.blocked if params[:search] == 'blockeds'
-    @people = @user.all_friends if params[:search] == 'friends'
+    @people = @user.all_users true if params[:search] == 'friends'
   end
 
   def show
@@ -19,7 +17,7 @@ class SearchController < ApplicationController
 
   private
 
-  def searhc_params
+  def search_params
     param.require(:search).permit(:search)
   end
 end
