@@ -61,25 +61,25 @@ class User < ApplicationRecord
     all_users = []
     sql = "SELECT u.id, u.username, u.profile_pic_file_name
            FROM users u
-           WHERE u.id != #{id} 
-           AND NOT EXISTS(SELECT friendships.id 
-                          FROM friendships 
-                          WHERE (friendships.user_id = #{id} 
-                                 AND friendships.friend_id = u.id) 
-                                 OR (friendships.friend_id = #{id} 
+           WHERE u.id != #{id}
+           AND NOT EXISTS(SELECT friendships.id
+                          FROM friendships
+                          WHERE (friendships.user_id = #{id}
+                                 AND friendships.friend_id = u.id)
+                                 OR (friendships.friend_id = #{id}
                                  AND friendships.user_id = u.id))"
     unexisting_friendships = User.find_by_sql(sql) unless friends_only
 
     sql = "SELECT u.id, u.username, u.profile_pic_file_name, f.id AS friendship_id, f.status
-           FROM users u JOIN friendships f ON (f.user_id = #{id} 
-                                               AND f.friend_id = u.id) 
-                                               OR (f.friend_id = #{id} 
+           FROM users u JOIN friendships f ON (f.user_id = #{id}
+                                               AND f.friend_id = u.id)
+                                               OR (f.friend_id = #{id}
                                                AND f.user_id = u.id)
-           WHERE u.id != #{id} 
-           AND EXISTS(SELECT friendships.id FROM friendships 
-               WHERE (friendships.user_id = #{id} 
-                      AND friendships.friend_id = u.id) 
-                      OR (friendships.friend_id = #{id} 
+           WHERE u.id != #{id}
+           AND EXISTS(SELECT friendships.id FROM friendships
+               WHERE (friendships.user_id = #{id}
+                      AND friendships.friend_id = u.id)
+                      OR (friendships.friend_id = #{id}
                       AND friendships.user_id = u.id))
            AND CASE
            WHEN f.status = 'blocked' AND f.blocker != #{id}
@@ -119,27 +119,27 @@ class User < ApplicationRecord
     all_users = []
     sql = "SELECT u.id, u.username, u.profile_pic_file_name
            FROM users u
-           WHERE u.id != #{id} AND u.username LIKE '#{username}%' 
-           AND NOT EXISTS(SELECT friendships.id 
-                          FROM friendships 
-                          WHERE (friendships.user_id = #{id} 
-                                 AND friendships.friend_id = u.id) 
-                                 OR (friendships.friend_id = #{id} 
+           WHERE u.id != #{id} AND u.username LIKE '#{username}%'
+           AND NOT EXISTS(SELECT friendships.id
+                          FROM friendships
+                          WHERE (friendships.user_id = #{id}
+                                 AND friendships.friend_id = u.id)
+                                 OR (friendships.friend_id = #{id}
                                  AND friendships.user_id = u.id))"
 
     unexisting_friendships = User.find_by_sql(sql)
     sql = "SELECT u.id, u.username,u.profile_pic_file_name, f.id AS friendship_id, f.status
-           FROM users u JOIN friendships f ON (f.user_id = #{id} 
-                                               AND f.friend_id = u.id) 
-                                               OR (f.friend_id = #{id} 
+           FROM users u JOIN friendships f ON (f.user_id = #{id}
+                                               AND f.friend_id = u.id)
+                                               OR (f.friend_id = #{id}
                                                AND f.user_id = u.id)
-           WHERE u.id != #{id} 
-                 AND u.username LIKE '#{username}%' 
-                 AND EXISTS(SELECT friendships.id 
-                            FROM friendships 
-                            WHERE (friendships.user_id = #{id} 
-                            AND friendships.friend_id = u.id) 
-                            OR (friendships.friend_id = #{id} 
+           WHERE u.id != #{id}
+                 AND u.username LIKE '#{username}%'
+                 AND EXISTS(SELECT friendships.id
+                            FROM friendships
+                            WHERE (friendships.user_id = #{id}
+                            AND friendships.friend_id = u.id)
+                            OR (friendships.friend_id = #{id}
                             AND friendships.user_id = u.id))
            AND CASE
            WHEN f.status = 'blocked' AND f.blocker != #{id}
@@ -156,9 +156,9 @@ class User < ApplicationRecord
     sql = "SELECT u.id AS user_id, u.username,
                   p.id, p.content, p.created_at, p.post_pic_file_name
            FROM users u
-           JOIN friendships f ON (f.user_id = #{id} 
-                                  AND f.friend_id = u.id) 
-                                  OR (f.friend_id = #{id} 
+           JOIN friendships f ON (f.user_id = #{id}
+                                  AND f.friend_id = u.id)
+                                  OR (f.friend_id = #{id}
                                   AND f.user_id = u.id)
            JOIN posts p ON p.user_id = u.id
            WHERE f.status = 'friends'
@@ -172,9 +172,9 @@ class User < ApplicationRecord
   def all_friends
     sql = "SELECT u.id, u.username,u.profile_pic_file_name, f.id AS friendship_id, f.status
            FROM users u
-           JOIN friendships f ON (f.user_id = #{id} 
-                                  AND f.friend_id = u.id) 
-                                  OR (f.friend_id = #{id} 
+           JOIN friendships f ON (f.user_id = #{id}
+                                  AND f.friend_id = u.id)
+                                  OR (f.friend_id = #{id}
                                   AND f.user_id = u.id)
            WHERE u.id != #{id} AND f.status = 'friends'"
     User.find_by_sql(sql)
@@ -190,12 +190,12 @@ class User < ApplicationRecord
 
   def blocked_me
     sql = "SELECT u.id, u.username, f.id AS friendship_id, f.status
-           FROM users u JOIN friendships f ON (f.user_id = #{id} 
-                                               AND f.friend_id = u.id) 
-                                               OR (f.friend_id = #{id} 
+           FROM users u JOIN friendships f ON (f.user_id = #{id}
+                                               AND f.friend_id = u.id)
+                                               OR (f.friend_id = #{id}
                                                 AND f.user_id = u.id)
-           WHERE u.id != #{id} 
-                 AND f.status = 'blocked' 
+           WHERE u.id != #{id}
+                 AND f.status = 'blocked'
                  AND f.blocker != #{id}"
     User.find_by_sql(sql)
   end
@@ -203,12 +203,12 @@ class User < ApplicationRecord
   # returns every user that
   def blocked
     sql = "SELECT u.id, u.username, u.profile_pic_file_name, f.id AS friendship_id, f.status
-           FROM users u JOIN friendships f ON (f.user_id = #{id} 
-                                               AND f.friend_id = u.id) 
-                                               OR (f.friend_id = #{id} 
+           FROM users u JOIN friendships f ON (f.user_id = #{id}
+                                               AND f.friend_id = u.id)
+                                               OR (f.friend_id = #{id}
                                                AND f.user_id = u.id)
-           WHERE u.id != #{id} 
-                 AND f.status = 'blocked' 
+           WHERE u.id != #{id}
+                 AND f.status = 'blocked'
                  AND f.blocker = #{id}"
     User.find_by_sql(sql)
   end
@@ -219,9 +219,9 @@ class User < ApplicationRecord
   def pending
     sql = "SELECT u.id, u.username,u.profile_pic_file_name, f.id AS friendship_id, f.status
            FROM users u
-           JOIN friendships f ON (f.friend_id = #{id} 
+           JOIN friendships f ON (f.friend_id = #{id}
                                   AND f.user_id = u.id)
-           WHERE u.id != #{id} 
+           WHERE u.id != #{id}
            AND f.status = 'waiting' "
     pending = User.find_by_sql(sql)
     pending
@@ -230,11 +230,11 @@ class User < ApplicationRecord
   def reloaded(friend_id)
     sql = "SELECT u.id, u.username,u.profile_pic_file_name, f.id AS friendship_id, f.status
            FROM users u
-           JOIN friendships f ON (f.friend_id = u.id 
+           JOIN friendships f ON (f.friend_id = u.id
                                   AND f.user_id = #{id})
-           WHERE u.id != #{id} 
-                 AND (f.status = 'waiting' 
-                      OR f.status = 'blocked')  
+           WHERE u.id != #{id}
+                 AND (f.status = 'waiting'
+                      OR f.status = 'blocked')
                  AND f.friend_id = #{friend_id}"
     pending = User.find_by_sql(sql)
     pending
