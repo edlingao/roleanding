@@ -6,8 +6,8 @@ class User < ApplicationRecord
   before_save { email.downcase! }
   before_save { username.downcase! }
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-  devise :omniauthable, omniauth_providers: [:facebook]
+         :recoverable, :rememberable, :validatable, 
+         :omniauthable, omniauth_providers: [:facebook]
 
   validates :username, presence: true, uniqueness: { case_sensitive: false },
                        length: { maximum: 30 }
@@ -29,19 +29,23 @@ class User < ApplicationRecord
   validates_attachment_content_type :profile_pic, content_type: %r{\Aimage/.*\z}
 
   def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info']
-        user.email = data['email'] if user.email.blank?
+    if session['devise.facebook_data']
+      new(session['devise.facebook_data'], without_protection: true) do |user|
+        user.attributes = params
+        user.valid?
       end
+    else
+      super
     end
   end
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
-      user.name = auth.info.name # assuming the user model has a name
-      user.profile_pic_file_name = auth.info.image # assuming the user model has an image
+      user.username = auth.info.name # assuming the user model has a name
     end
   end
 
