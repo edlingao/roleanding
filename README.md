@@ -27,7 +27,10 @@ This is the README for Roleanding Social Network
         *   `# http://guides.rubyonrails.org/configuring.html#database-pooling`
         *   `pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>`
         *   `gem 'rspec'`
-        *    gem 'jquery-rails'
-gem 'database_cleaner'
+        *   `gem 'jquery-rails'`
+        *   `gem 'database_cleaner'`
     * ## RUN `rails db:create`
     * ## RUN `rails db:migrate`
+
+    ## Live example
+    [Roleanding](https://roleanding.herokuapp.com/)
