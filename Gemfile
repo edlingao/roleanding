@@ -11,6 +11,8 @@ gem 'rubocop'
 gem 'rspec'
 gem 'jquery-rails'
 gem 'database_cleaner'
+gem 'figaro'
+
 
 
 
