@@ -1,0 +1,13 @@
+
+<div class = "feed-container">
+    <div class = "post-form">
+        <%= render 'shared/post_form', personal_profile: false%>
+    </div>
+    <main id="feed" class="feed">
+        <%= render @posts, has_limit: true, from_js: false%>
+    </main>
+    <aside class="friend-list">
+        <%= render 'shared/friends'%>
+    </aside>
+
+</div>

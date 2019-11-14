@@ -1,0 +1,4 @@
+$('#new_post').after( '<%= j render @post, from_js: true %>');
+$('#post_id_<%= @post.id%>').fadeOut(100);
+$('#new_post_text_area').val("").blur();
+$('#post_id_<%= @post.id%>').fadeIn();

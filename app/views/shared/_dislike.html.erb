@@ -1,0 +1,12 @@
+<%= link_to(like_path(post_id: @post, like_id: @like.id), id: "dislike_#{@like.id}", method: :delete, data: {remote: true}, class: "dislike") do%>
+    <i class="material-icons">favorite</i>
+<%end%>
+
+<div id = "post-link_<%= @post.id%>"class = "post-link">
+    <%= link_to  post_path(@post) do %>
+        <i class="material-icons">forum</i>
+    <%end%>
+</div>
+<div id="like-counter_<%= @post.id%>" class="likes-number">
+    <h2><%= @post.likes.count > 1 ? "#{@post.likes.count} Likes" : "#{@post.likes.count} Like"%></h2>
+</div>

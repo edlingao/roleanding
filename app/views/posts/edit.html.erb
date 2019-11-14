@@ -1,0 +1,28 @@
+<div class="feed-container solo-post">
+    <main class="feed">
+        <div class="post">
+            <header class = 'post-header'>
+                <div class='author'>
+                    <h1><%=@author.username.capitalize%> <brown>posted</brown></h1>
+                </div>
+
+                <%=link_to image_tag(@author.profile_pic.url, class:"profile-pic"), username_path(@author.username) %>
+            </header>
+            <main class='post-content'>
+                <h1>OLD POST</h1><br><br>
+                <%=image_tag(@post.post_pic.url) if @post.post_pic.url != "/post_pics/original/missing.png" %>
+                <div class='post-description'>
+                    <%=simple_format(@post.content)%>
+                </div>
+                <h1>NEW POST</h1><br><br>
+                <div class = "post-form edit-post">
+                    <%= render 'shared/post_form', personal_profile: false%>
+                </div>
+                
+                
+            </main>
+            
+        </div>
+
+    </main>
+</div>

@@ -1,0 +1,51 @@
+
+<main class="main">
+    <aside class = "presentation-text">
+        <h1>Hi and welcome to Reloading</h1>
+        
+        <div class="list-text">
+            <div class="description-text">
+                <p>
+                    This page is build and design with the main propose to make the roleplaying community lives easier
+                    <br>In this page you will be able to:
+                </p>
+            </div>
+            <ul>
+                <li>
+                    <p>Create multiple OC’s sheets as well as edit them and create alternative universe characters <i class="material-icons">emoji_people</i></p>
+                </li>
+                <li>
+                    <p>Create chat groups with all your OC’s as well as other people OC's <i class="material-icons">mode_comment</i></p>
+                </li>
+                <li>
+                    <p>Create massive community groups <i class="material-icons">group_add</i></p>
+                </li>
+                <li>
+                    <p>Create posts and watch other users posts <i class="material-icons">menu_book</i></p>
+                </li>
+                <li>
+                    <p>Give love to well made OC’s sheets and rate them with a beautiful “<i class="material-icons red">favorite</i>“</p>
+                </li>
+            </ul>
+        </div>
+        
+        
+        
+    </aside>
+    <div class="signup">
+        <div class = "look-at-me-text">
+            <h1>Are you new?</h1>
+            <h1>Register today!!</h1>
+        </div>
+        
+        <%= link_to  user_facebook_omniauth_authorize_path, title: "Sign up with facebook", class: "sign-up-with-facebook" do%>
+            <p>Signup with <facebook class="facebook">Facebook</facebook> </p>
+        <%end%>
+        <p class = "or">Or</p>
+        <%= render 'signup'%>
+    </div>
+</main>
+
+
+
+

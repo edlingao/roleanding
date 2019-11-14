@@ -1,0 +1,1067 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$red: #FF0000;
+$deep-blue: #161032;
+$yellow: #FAFF81;
+$light-orange: #FFC53A;
+$orange: #E06D06;
+$light-brown: #B26700;
+$facebook-blue: #003AAB;
+$green: #A7FF00;
+
+
+$break-medium: 1366px;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+    color: $deep-blue;
+}
+.hidden{
+    display: none;
+    
+}
+body{
+    background: linear-gradient(to bottom , $yellow, $light-orange);
+    background-attachment: fixed;
+    background-size: contain;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    .main-header{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        padding: 0 25px;
+//---Login form-------------------------------------------------------------------
+        .login{
+            width: 60%;
+            
+            background: $deep-blue;
+            color: white;
+            display: flex;
+            align-items: center;
+            border-radius: 20vh;
+
+            form{
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                justify-content: space-around;
+                font-size: 35px;
+                label{
+                    color: white;
+                }
+                input[type=email], input[type=password]{
+                    font-size: 20px;
+                    outline: none;
+                    border:0;
+                    border-radius: 25vh;
+                    margin-left: 10px;
+                    text-align: left;
+                    padding: 5px 20px;
+
+                }
+
+                input[type=submit]{
+                    font-size: 20px;
+                    border: 0;
+                    cursor: pointer;
+                    padding: 5px 15px;
+
+                    background: $yellow;
+                    color: $deep-blue;
+
+                }
+                .field{
+                    display: flex;
+                    align-items: center;
+                    
+                }
+            }
+        }
+    }
+//-Signup form-----------------------------------------------------------------------
+    .main{
+        margin-top: 10vh;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 15vh;
+        grid-template-rows: 75.7vh;
+        padding: 0 40px;
+        .signup{
+            
+            background: $deep-blue;
+            color: white;
+            padding: 0 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            border-radius: 3vh;
+            label{
+                color: white
+            }
+            .look-at-me-text{
+                h1{
+                    font-size: 60px;
+                    color: white;
+                }
+                align-self: flex-end;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                top: 0;
+                
+            }
+            .sign-up-with-facebook{
+                facebook{
+                    color: $facebook-blue;
+                    font-weight: bold;
+                }
+                font-size: 40px;
+                text-decoration: none;
+                color: $deep-blue;
+                background: $yellow;
+                padding: 10px 20px;
+                border-radius: 50vh;
+            }
+            .or{
+                font-size: 40px;
+                color: white;
+            }
+            .signup-form{
+                height: 50%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items:flex-end ;
+                .field{
+                    font-size: 40px;
+                    input[type=text], input[type=password], input[type=email]{
+                        font-size: 25px;
+                        margin-left: 22px;
+                        border: 0;
+                        border-radius: 1vh;
+                        outline: none;
+                        text-align: center;
+                        padding: 10px 5vh;
+                    }
+                }
+                .password-confirmation{
+                    font-size: 25px;
+                    margin-bottom: 10px;
+                }
+                .signup-button{
+                    border: 0;
+                    font-size: 30px;
+                    padding: 10px;
+                    border-radius: 10vh;
+                    color: $deep-blue;
+                    background: $yellow;
+                    cursor: pointer;
+                }
+
+            }
+        }
+
+    }
+//----White box text-----------------------------------------------------------------
+    .main{
+        .presentation-text{
+            background: white;
+            padding: 15px 40px;
+            border-radius: 3vh;
+            h1{
+                font-size: 49px;
+                margin-bottom: 24px;
+            }
+            .list-text{
+                font-size: 30px;
+                .description-text{
+                    margin-bottom: 20px;
+                }
+                ul{
+                    li{
+                        margin-bottom: 35px;
+                        .material-icons{
+                            color: $orange;
+                            font-size: 30px
+                        }
+                        .red{
+                            color: $red;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    .user-functions{
+        width: 40%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .noti{
+            position: relative;
+        }
+        .function{
+            height: 110px;
+            width: 110px;
+            background: $deep-blue;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-decoration: none;
+
+            border-radius: 100%;
+            transition: 1s;
+            &:hover{
+                background: $light-orange;
+                transition: .30s;
+            }
+            i{
+                font-size: 100px;
+                color: white;
+            }
+            
+            .notifications{
+                background: $red;
+                height: 60px;
+                width: 60px;
+                position: absolute;
+                border-radius: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                right: -20px;
+                top: 0;
+                p{
+                    font-size: 35px;
+                    color: white;
+                    font-weight: bold;
+                    
+                }
+
+            }
+            
+        }
+
+    }
+    
+    .feed-container{
+        
+        width: 95%;
+        margin: 100px auto;
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        grid-template-areas: "form-post form-post"
+                             "friends feed";
+        grid-column-gap: 40px; 
+        
+        .feed{
+            grid-area: feed;
+            .post{
+                background: white;
+                margin-bottom: 40px;
+                border-radius: 2vh;
+                padding: 30px 40px;
+                .post-header{
+                    display: flex;
+                    flex-direction: row-reverse;
+                    justify-content: space-between;
+                    align-items: center;
+                    
+                    brown{
+                        color: $light-brown;
+                    }
+                    h1{
+                        font-size: 60px;
+                        font-weight: 100;
+                    }
+                    img{
+                        width: 200px;
+                        height: 200px;
+                        background-size: cover;
+                        border-radius: 2vh;
+                    }
+                    
+                }
+                .post-content{
+                    margin-top: 50px;
+                    margin-bottom: 50px;
+                    .edit-post{
+                        form{
+                            textarea{
+                                background: $deep-blue;
+                                color: white;
+                            }
+                            .left{
+                                background: $deep-blue;
+                            }
+                        }
+                        .image-preview{
+                            img{
+                                width: 90%;
+                            }
+                            margin-bottom: 50px;
+                            
+                        }
+                    }
+                    img{
+                        width: 100%;
+                        
+                        margin-bottom: 50px;
+                        background-size: cover;
+                        
+                    }
+                    .post-description{
+                        p{
+                            font-size: 35px;
+                            margin-bottom: 40px
+                        }
+                    }
+                    .likes{
+                        
+                        display: grid;
+                        grid-template-columns: 40px 400px;
+                        grid-template-rows: 40px;
+                        grid-template-areas: "like link"
+                                             "like-counter like-counter";
+                        height: 111px;
+                        .like, .dislike{
+                            grid-area: like;
+                            justify-self: center;
+                            
+                            i{
+                                color: $deep-blue;
+                                font-size: 32px;
+                            }
+                            a{
+                                height: 32px;
+                            }
+                        }
+                        .dislike{
+                            i{
+                                color: $red;
+                            }
+                        }
+                        
+                        .post-link{
+                            grid-area: link;
+                            i{
+                                color: $deep-blue;
+                                font-size: 32px;
+                            }
+                        }
+
+                        .likes-number{
+                            grid-area: like-counter;
+                            text-align: start;
+                            font-size: 15px;
+                            
+                        }
+
+                    }
+
+                }
+                .comments{
+                    background: $light-brown;
+                    padding: 25px;
+                    border-radius: 2vh;
+                    .comment{
+                        img{
+                            width: 75px;
+                            height: 75px;
+                            background-size: cover;
+                            border-radius: 1vh;
+                            margin-right: 20px;
+                        }
+                        .comment-author{
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
+                            h3{
+                                color:white;
+                                font-weight: 100;
+                                font-size: 30px;
+                            }
+                        }
+                        .comment-content{
+                            padding: 10px 20px;
+                            background: $light-orange;
+                            margin-top: 10px;
+                            margin-bottom: 20px;
+                            border-radius: 2vh;
+                            text-align: center;
+                            p{
+                                font-size: 25px;
+                            }
+                        }
+                    }
+                }
+                .comment-form-container{
+                    display: flex;
+                    width: 100%;
+                    justify-content: flex-end;
+                    align-items:center;
+                }
+                .new-comment-form{
+                    margin-top: 30px;
+                    background: $deep-blue;
+                    width: 80%;
+                    padding: 12px 20px;
+                    border-radius: 2vh;
+                    align-self: flex-end;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: flex-end;
+                    form{
+                        width: 93%;
+                        display: flex;
+                        flex-direction: column;
+                    
+                        textarea{
+                            padding: 13px;
+                            height: 55px;
+                            font-size: 21px;
+                            border-radius: 1.5vh;
+                            width: 100%;
+                        }
+                        button{
+                            border: 0;
+                            width: 85px;
+                            height: 40px;
+                            align-self: flex-end;
+                            margin-top: 10px;
+                            border-radius: .5vh;
+                            background: $light-orange;
+                            i{
+                                font-size: 40px;
+                                transform: rotate(-90deg);
+                            }
+                        }
+                    }
+                    
+
+                    .comment-user{
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+                        margin-bottom: 20px;
+                        align-self: flex-start;
+                        img{
+                            height: 50px;
+                            width: 50px;
+                            border-radius: 1vh;
+                            margin-right: 10px;
+                        }
+                        p{
+                            color: $light-brown;
+                            font-size: 25px;
+                        }
+
+                    }
+                }
+            }
+        }
+        .friend-list{
+            grid-area: friends;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 35px;
+            border-radius: 2vh;
+            
+            .friend{
+                height: 70px;
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+                margin-bottom: 87px;
+                p{
+                    font-size: 25px;
+                }
+                .profile-pic{
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 100%;
+                    margin-right: 10px;
+                }
+            }
+            h1{
+                align-self: center;
+                justify-self: flex-start;
+                font-size: 50px;
+                margin-bottom: 65px;
+            }
+        }
+        .post-form{
+            grid-area: form-post;
+            position: relative;
+            .hide-image-preview{
+                animation: post-hide forwards;
+                animation-duration: 1s;
+            }
+            .show-image-preview{
+                animation: post-show;
+                animation-duration: 1s;
+            }
+            .image-preview{
+                position: absolute;
+                height: 700px;
+                width: 900px;
+                background: $deep-blue;
+                top: 130px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                border-radius: 3vh;
+                
+                img{
+                   
+                    max-height: 70%;
+                    border-radius: 4vh;
+                    
+
+                }
+                h1{
+                    color: white;
+                    font-weight: bold;
+                    font-size: 50px;
+                }
+                .close-button{
+                    position: absolute;
+                    top: 30px;
+                    right: 20px;
+                    height: 65px;
+                    width: 65px;
+                    background: $red;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: .5vh;
+                    cursor: pointer;
+                    i{
+                        font-size: 60px;
+                        color: white;
+                    }
+                    
+                    
+                }
+            }
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            
+            textarea{
+                width: 100%;
+                
+                height: 120px;
+                border: 0;
+                border-radius: 3vh;
+                font-size: 40px;
+                padding: 35px 30px;
+                outline: none;
+                resize: none;
+            }
+            .left{
+                margin-top: 20px;
+                margin-bottom: 20px;
+                align-self: flex-end;
+                background: white;
+                padding: 8px 15px;
+                border-radius: 2vh;
+                button{
+                    border: 0;
+                    background: (0,0,0,0);
+                    cursor: pointer;
+                    outline: none;
+                }
+                i{
+                    font-size: 64px;   
+                    
+                }
+                .insert-photo i{
+                    color: $light-orange;
+                    cursor: pointer;
+                }
+                .create-post i{
+                    color: $light-brown;
+                    transform: rotate(-90deg)
+                }
+            }
+        }
+    }
+    .solo-post{
+        width: 100%;
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        .feed{
+            width: 80%;
+        }
+    }
+    @keyframes move {
+        0%{
+            top: -100vh;
+        } 
+        
+        100%{
+            top: 0px;
+        }
+    }
+    @keyframes back-move {
+        0%{
+            top: 0px;
+        } 
+        
+        100%{
+            top: -100vh;
+        }
+    }
+    @keyframes post-show {
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 1;
+        }
+    }
+    @keyframes post-hide {
+        0%{
+            opacity: 1;
+        }
+        100%{
+            opacity: 0;
+            display: none;
+        }
+    }
+
+    .back-anim{
+        animation: back-move forwards;
+        animation-duration: 2s;
+    }
+    .anim{
+        animation: move;
+        animation-duration: 2s;
+
+    }
+    
+    .change-pic-form{
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 1;
+
+        background: linear-gradient($yellow 30%, rgba(0,0,0,0) );
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        img{
+            height: 500px;
+            width: 500px;
+            border-radius: 2vh;
+        }
+        .preview{
+            height: 600px;
+            width: 600px;
+            background: $deep-blue;
+            border-radius: 2vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            .close-button{
+                position: absolute;
+                top: 10px;
+                right: -70px;
+                background: $red;
+                border-radius: 1vh;
+                cursor: pointer;
+
+                i{
+                    font-size: 64px;
+                    color: white;
+                    user-select: none;
+                }
+            }
+
+            
+        }
+        .buttons{
+            width: 600px;
+            
+            form{
+                margin-top: 20px;
+                widows: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                label{
+                    background: $light-orange;
+                    cursor: pointer;
+                    height: 80px;
+                    width: 100px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 2vh;
+                    i{
+                        color: $deep-blue;
+                        font-size: 64px;
+                    }
+                }
+                button{
+                    border: 0;
+                    transform: rotate(-90deg);
+                    background: $light-orange;
+                    cursor: pointer;
+                    outline: none;
+                    height: 100px;
+                    width: 70px;
+                    border-radius: 2vh;
+                    i{
+                        font-size: 64px;
+                        color: $deep-blue;
+                    }
+                }
+            }
+        }
+    }
+    .user-show{
+        grid-template-areas: "user-info feed"
+                             "friends feed";
+        grid-row-gap: 40px; 
+        grid-template-rows: 500px;
+        position: relative;
+
+        
+        .user-info{
+            grid-area: user-info;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            border-radius: 3vh;
+            padding: 32px 0px;
+            height: 500px;
+            width: 500px;
+            position: relative;
+            brown{
+                color: $light-brown;
+                font-weight: 100;
+            }
+            img{
+                height: 350px;
+                width: 350px;
+                background-size: cover;
+                border-radius: 2vh;
+                margin-bottom: 25px;
+            }
+            h1{
+                font-size: 50px;
+                font-weight: 900;
+                
+            }
+            .change-profile-pic{
+                position: absolute;
+                width: 90px;
+                height: 90px;
+                background: $deep-blue;
+                border-radius: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+
+                bottom: 10px;
+                right: 14px;
+
+                user-select: none;
+                i{
+                    color: $yellow;
+                    font-size: 64px;
+                }
+            }
+        }
+
+
+    }
+    .search-bar{
+        width: 100%;
+        margin: auto;
+        margin-top: 90px;
+        margin-bottom: 70px;
+        padding: 0px 30px;
+        form{
+            width: 100%;
+            position: relative;
+            input[type=text]{
+                width: 100%;
+                height: 144px;
+                border: 0;
+                border-radius: 3vh;
+                padding: 50px 40px;
+                font-size: 40px;
+            }
+            button{
+                position: absolute;
+                right: 40px;
+                top: 25px;
+                height: 100px;
+                width: 100px;
+                border: 0;
+                background: $deep-blue;
+                border-radius: 100%;
+                cursor: pointer;
+                i{
+                    font-size: 64px;
+                    color: $yellow;
+                }
+            }
+        }
+    }
+
+    
+    .people{
+        width: 80%;
+        margin: auto;
+        .not-found{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            i{
+                user-select: none;
+                font-size: 60px;
+                font-weight: 900;
+                text-align: center;
+            }
+        }
+        .person{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            border-radius: 3vh;
+            .person-links{
+                display: flex;
+                flex-direction: row;
+                
+                h1{
+                    margin-left: 15px;
+                    font-weight: 100;
+                    margin-top: 10px;
+                }
+                img{
+                    height: 150px;
+                    width: 150px;
+                    background-size: contain;
+                    border-radius: 2vh;
+                }
+            }
+            .friend-links{
+                display: flex;
+                flex-direction: row;
+                flex-direction: row-reverse;
+
+                .add-person, .waiting, .delete-person{
+                    margin-right: 40px;
+                }
+                
+                .blocked{
+                    background: $light-brown;
+                    i{
+                        font-size: 90px;
+                    }
+                }
+                .unblock{
+                    background: $deep-blue;
+                    i{
+                        font-size: 90px;
+                    }
+                }
+                a, .waiting{
+                    width: 200px;
+                    height: 100px;
+                    background: $light-orange;
+                    text-decoration: none;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    i{
+                        font-size: 120px;
+                        color: white;
+                    }
+                }
+                .waiting{
+                    user-select: none;
+                    background: $orange;
+    
+                    i{
+                        font-size: 90px;
+                        
+                    }
+                }
+                .delete-person{
+                    background: $orange;
+                }
+            }
+        }
+    }
+    .notification-add{
+        margin-top: 120px;
+        .cero-notification-message{
+            margin-top: 100px;
+            i{
+                font-size: 10rem;
+                font-weight: 900;
+                user-select: none;
+                justify-content: center;
+                margin: auto;
+                
+            }
+        }
+        .accept-links{
+            display: flex;
+            flex-direction: row;
+            a{
+                background: $light-orange;
+                text-decoration: none;
+                width: 200px;
+                height: 100px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                i{
+                    font-size: 120px;
+                    color: white;
+                }
+            }
+            .reject{
+                background: $red;
+                margin-left: 40px;
+            }
+        }
+        
+    }
+        
+        
+    
+}
+.container{
+    @media screen and (max-width: $break-medium){
+        .main-header{
+            .login{
+                padding: 0px 20px;
+                form{
+                    
+                    input[type=email], input[type=submit], input[type=password] ,label{
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+            
+        }
+
+        
+        .main{
+            .presentation-text{
+                .list-text{
+                    .description-text{
+                        font-size: 1.2rem;
+                    }
+                    ul{
+                        li{
+                            margin-bottom: 10px;
+                            font-size: 1.2rem;
+                            .material-icons{
+                                font-size: 25px;
+                            }
+                        }
+                    }
+                }
+            }
+            .signup{
+                .look-at-me-text{
+                    h1{
+                        font-size: 40px;
+                    }
+                    
+                }
+                .sign-up-with-facebook{
+                    font-size: 30px;
+                }
+                .or{
+                    font-size: 1.3rem;
+                }
+                .signup-form{
+                    height: 55%;
+                    .field{
+                        label{
+                            font-size: 20px;
+                        }
+                        input[type=email], input[type=email], input[type=text], input[type=password]{
+                            font-size: 20px;
+                            padding: 10px 1vh;
+                        }
+                    }
+                    .password-confirmation{
+                        margin-top: 10px;
+                    }
+                    .signup-button{
+                        font-size: 15px;
+                    }
+                }
+            }
+
+
+
+        }
+
+        .main-header{
+            .user-functions{
+                .function{
+                    height: 90px;
+                    width: 90px;
+                    i{
+                       font-size: 70px;
+                    }
+                }
+                .notifications{
+                    height: 40px;
+                    width: 40px;
+                    p{
+                        font-size: 25px;
+                    }
+                }
+            }
+        }
+
+    }
+}

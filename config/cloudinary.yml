@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: edlingaostuff
+  api_key: '285687584244352'
+  api_secret: yMNDZDQVE28l9MVZgbr-cjskBm4
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: edlingaostuff
+  api_key: '285687584244352'
+  api_secret: yMNDZDQVE28l9MVZgbr-cjskBm4
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: edlingaostuff
+  api_key: '285687584244352'
+  api_secret: yMNDZDQVE28l9MVZgbr-cjskBm4
+  enhance_image_tag: true
+  static_file_support: false

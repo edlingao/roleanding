@@ -1,0 +1,17 @@
+
+    <header class = "main-header">
+        <div class = "logo">
+            <%= link_to image_tag("RoleandingLogo.svg", class: "logo"), root_path %>  
+        </div>
+        <% if user_signed_in? %>
+            <div class="user-functions">
+                <%= render 'shared/user_functions'%>
+            </div>
+        <% else %>
+            <div class="login">
+                <%= render 'shared/login'%>
+            </div>
+        <% end %>
+        
+            
+    </header>

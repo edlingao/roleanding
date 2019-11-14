@@ -1,0 +1,27 @@
+
+<%= link_to search_path, class: 'function' do%>
+    <i class="material-icons">search</i>
+<%end%> 
+<%= link_to user_home_path(username: current_user.username), class: 'function' do%>
+    <i class="material-icons">person_outline</i>
+<%end%>
+<%= link_to edit_user_registration_path, class: 'function' do%>
+    <i class="material-icons">edit</i>
+<%end%>
+
+<% if current_user.pending.count == 0 %>
+  <%class_var = "hidden"%>
+  <%p_class_var = ""%>
+<% else %>
+  <%class_var = "notifications"%>
+<% end %>
+
+
+<%= link_to notifications_path, class: "function noti", id: 'notification' do %>
+    <%= content_tag(:div, content_tag(:p, current_user.pending.count, class: p_class_var), class: class_var)%>
+    
+    <i class="material-icons">notifications</i>
+<%end%>
+<%= link_to destroy_user_session_path, method: :delete, class: 'function' do%>
+    <i class="material-icons">exit_to_app</i>
+<%end%>

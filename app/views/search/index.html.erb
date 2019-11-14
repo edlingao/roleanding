@@ -1,0 +1,15 @@
+<!-- SEARCH PEOPLE FOR BLOCKING AND SENDING FRIENDSHIP NOTIFICATION -->
+
+<div class="search-bar">
+    <%= render 'search'%>
+</div>
+    
+<main class="people">
+    <%= render @people %>
+    <% if @people == [] %>
+        <div class="not-found">
+            <i>Who?<br>Perhaps you misspelled</i>
+        </div>
+<% end %>
+</main>
+

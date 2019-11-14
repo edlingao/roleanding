@@ -4,12 +4,27 @@
     <title>Roleanding</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
 
+    
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+  
+
+    <%= favicon_link_tag asset_path('favicon.ico') %>
+    <script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <%=render 'shared/header'%>
+      <%= yield %>
+    </div>
+
   </body>
 </html>

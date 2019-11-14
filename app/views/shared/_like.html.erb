@@ -1,0 +1,11 @@
+<%= link_to(like_path(post_id: @post), id: "like_#{@post.id}", class: "like", method: :put, data: {remote: true}) do%>
+    <i class="material-icons">favorite_border</i>
+<%end%>
+<div id = "post-link_<%= @post.id%>"class = "post-link">
+    <%= link_to  post_path(@post) do %>
+        <i class="material-icons">forum</i>
+    <%end%>
+</div>
+<div id="like-counter_<%= @post.id%>" class="likes-number">
+    <h2><%= @post.likes.count > 1 ? "#{@post.likes.count} Likes" : "#{@post.likes.count} Like"%></h2>
+</div>
