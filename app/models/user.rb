@@ -6,7 +6,7 @@ class User < ApplicationRecord
   before_save { email.downcase! }
   before_save { username.downcase! }
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, 
+         :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
 
   validates :username, presence: true, uniqueness: { case_sensitive: false },
