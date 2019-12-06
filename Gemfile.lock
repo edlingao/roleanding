@@ -175,7 +175,7 @@ GEM
       ast (~> 2.4.0)
     pg (1.1.4)
     public_suffix (3.1.1)
-    puma (3.12.1)
+    puma (3.12.2)
     rack (2.0.7)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -323,7 +323,7 @@ DEPENDENCIES
   paperclip (~> 6.0.0)
   paperclip-cloudinary
   pg (>= 0.18, < 2.0)
-  puma (~> 3.11)
+  puma (~> 3.12)
   rails (~> 5.2.3)
   rspec
   rspec-rails (~> 3.8)
